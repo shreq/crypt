@@ -25,5 +25,15 @@ namespace zad1
             this.key = BitConverter.GetBytes(key);
             Array.Reverse(this.key);    // cuz lil endian
         }
+
+        public String BytesArrayToString(byte[] ar)
+        {
+            String s = "";
+
+            foreach(byte f in ar)
+                s = f.ToString();
+
+            return s;
+        }
     }
 }

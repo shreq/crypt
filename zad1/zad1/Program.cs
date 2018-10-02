@@ -24,11 +24,14 @@ namespace zad1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
 
             Desx dx = new Desx("./../../../file.txt", "./../../../key.txt");
 
-            //Application.label1
+            Form1 f = new Form1();
+            f.label1.Text = dx.BytesArrayToString(dx.file);
+            f.label2.Text = dx.BytesArrayToString(dx.key);
+
+            Application.Run(f);
         }
     }
 }
