@@ -22,14 +22,16 @@ namespace zad1
         [STAThread]
         static void Main()
         {
+            //string filepath = "./../../../file.txt";
+            //string key = "./../../../key.txt";
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Desx dx = new Desx("./../../../file.txt", "./../../../key.txt");
-
             Form1 f = new Form1();
-            //f.label1.Text = dx.BytesArrayToString(dx.file);
-            //f.label2.Text = dx.BytesArrayToString(dx.key);
+
+            f.label1.Text = "mememe";
+            f.label2.Text = "mememememememememe";
 
             Application.Run(f);
         }

@@ -15,6 +15,8 @@ namespace zad1
 {
     public partial class Form1 : Form
     {
+        Desx dx = new Desx();
+
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +31,19 @@ namespace zad1
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Thanks!");
+            MessageBox.Show("Aye!");
+        }
+
+        private void KeyTB_TextChanged(object sender, EventArgs e)
+        {
+            dx.key_s = keyTB.Text;
+            label1.Text = dx.key_s; /**/
+        }
+
+        private void FilepathTB_TextChanged(object sender, EventArgs e)
+        {
+            dx.filepath_s = filepathTB.Text;
+            label2.Text = dx.filepath_s; /**/
         }
     }
 }

@@ -66,17 +66,17 @@ namespace zad1
             // 
             this.helloWorldLabel.AutoSize = true;
             this.helloWorldLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helloWorldLabel.Location = new System.Drawing.Point(202, 19);
+            this.helloWorldLabel.Location = new System.Drawing.Point(231, 9);
             this.helloWorldLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.helloWorldLabel.Name = "helloWorldLabel";
-            this.helloWorldLabel.Size = new System.Drawing.Size(131, 26);
+            this.helloWorldLabel.Size = new System.Drawing.Size(64, 26);
             this.helloWorldLabel.TabIndex = 3;
-            this.helloWorldLabel.Text = "Hello World!";
+            this.helloWorldLabel.Text = "Yeet!";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 168);
+            this.label1.Location = new System.Drawing.Point(76, 190);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -97,6 +97,7 @@ namespace zad1
             this.keyTB.Name = "keyTB";
             this.keyTB.Size = new System.Drawing.Size(321, 20);
             this.keyTB.TabIndex = 6;
+            this.keyTB.TextChanged += new System.EventHandler(this.KeyTB_TextChanged);
             // 
             // ketL
             // 
@@ -107,18 +108,19 @@ namespace zad1
             this.ketL.TabIndex = 7;
             this.ketL.Text = "Key:";
             // 
-            // textBox1
+            // filepathTB
             // 
             this.filepathTB.Location = new System.Drawing.Point(132, 88);
-            this.filepathTB.Name = "textBox1";
+            this.filepathTB.Name = "filepathTB";
             this.filepathTB.Size = new System.Drawing.Size(321, 20);
             this.filepathTB.TabIndex = 8;
+            this.filepathTB.TextChanged += new System.EventHandler(this.FilepathTB_TextChanged);
             // 
-            // label3
+            // filepathL
             // 
             this.filepathL.AutoSize = true;
             this.filepathL.Location = new System.Drawing.Point(76, 91);
-            this.filepathL.Name = "label3";
+            this.filepathL.Name = "filepathL";
             this.filepathL.Size = new System.Drawing.Size(50, 13);
             this.filepathL.TabIndex = 9;
             this.filepathL.Text = "File path:";
