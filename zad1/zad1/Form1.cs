@@ -40,14 +40,16 @@ namespace zad1
             label1.Text = dx.key_s; /**/
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void FilepathB_Click(object sender, EventArgs e)
         {
-            dx.filepath_s = filepathTB.Text;
+            dx.filepath = filepathTB.Text;
 
             try
             {
                 dx.LoadFile();
                 label2.Text = dx.BytesToString(dx.file_b);
+
+                dx.Chopper(label2.Text);
             }
             catch (Exception x)
             {

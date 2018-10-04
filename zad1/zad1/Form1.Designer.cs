@@ -37,7 +37,8 @@ namespace zad1
             this.ketL = new System.Windows.Forms.Label();
             this.filepathTB = new System.Windows.Forms.TextBox();
             this.filepathL = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.filepathB = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -125,22 +126,32 @@ namespace zad1
             this.filepathL.TabIndex = 9;
             this.filepathL.Text = "File path:";
             // 
-            // button2
+            // filepathB
             // 
-            this.button2.Location = new System.Drawing.Point(432, 86);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 20);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "load";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            this.filepathB.Location = new System.Drawing.Point(432, 86);
+            this.filepathB.Name = "filepathB";
+            this.filepathB.Size = new System.Drawing.Size(70, 20);
+            this.filepathB.TabIndex = 10;
+            this.filepathB.Text = "load";
+            this.filepathB.UseVisualStyleBackColor = true;
+            this.filepathB.Click += new System.EventHandler(this.FilepathB_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 236);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "label3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 437);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.filepathB);
             this.Controls.Add(this.filepathL);
             this.Controls.Add(this.filepathTB);
             this.Controls.Add(this.ketL);
@@ -169,7 +180,8 @@ namespace zad1
         public System.Windows.Forms.Label ketL;
         public System.Windows.Forms.TextBox filepathTB;
         public System.Windows.Forms.Label filepathL;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button filepathB;
+        public System.Windows.Forms.Label label3;
     }
 }
 

@@ -10,17 +10,18 @@ namespace zad1
     public class Desx
     {
         public string key_s;
-        public string filepath_s;
+        public string filepath;
         public byte[] file_b;
-        public List<uint> key = new List<uint>();
-        public List<uint> file = new List<uint>();
+
+        public List<byte> key = new List<byte>();
+        public List<byte> file = new List<byte>();
 
         public Desx()
         {}
 
         public void LoadFile()
         {
-            file_b = File.ReadAllBytes(filepath_s) ?? throw new Exception();
+            file_b = File.ReadAllBytes(filepath) ?? throw new Exception();
         }
 
         public string BytesToString(byte[] ar)
@@ -35,7 +36,18 @@ namespace zad1
 
         public void Chopper(string s)
         {
+            if (s.Length % 8 != 0)
+                throw new Exception();
 
+            for(int i=0; i<s.Length; )
+            {
+                string sb = "";
+
+                for(int j=0; j<8; i++, j++)
+                    sb += s[i];
+
+                file.Add(Convert.ToByte(sb, 2));
+            }
         }
     }
 }
