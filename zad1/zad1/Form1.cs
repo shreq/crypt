@@ -8,9 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-// This is the code for your desktop app.
-// Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-
 namespace zad1
 {
     public partial class Form1 : Form
@@ -26,7 +23,6 @@ namespace zad1
         {
             // Click on the link below to continue learning how to build a desktop app using WinForms!
             System.Diagnostics.Process.Start("http://aka.ms/dotnet-get-started-desktop");
-
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -36,7 +32,7 @@ namespace zad1
 
         private void KeyTB_TextChanged(object sender, EventArgs e)
         {
-            dx.key_s = keyTB.Text;
+            dx.key_s = keyTB.Text.Replace(" ", "");
             label1.Text = dx.key_s; /**/
         }
 
@@ -47,11 +43,22 @@ namespace zad1
             try
             {
                 dx.LoadFile();
-                label2.Text = dx.BytesToString(dx.file_b);
-
-                dx.Chopper(label2.Text);
+                dx.Chopper(dx.BytesToString(dx.file_b));
+                label2.Text = dx.BytesToString(dx.file_b); /**/
             }
-            catch (Exception x)
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
+
+        private void EncryptB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dx.Chopper(dx.key_s);
+            }
+            catch(Exception x)
             {
                 MessageBox.Show(x.Message);
             }

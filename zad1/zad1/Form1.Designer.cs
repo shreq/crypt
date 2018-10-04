@@ -38,13 +38,13 @@ namespace zad1
             this.filepathTB = new System.Windows.Forms.TextBox();
             this.filepathL = new System.Windows.Forms.Label();
             this.filepathB = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.encryptB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(123, 192);
+            this.linkLabel1.Location = new System.Drawing.Point(124, 415);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(284, 13);
@@ -55,7 +55,7 @@ namespace zad1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(218, 162);
+            this.button1.Location = new System.Drawing.Point(219, 385);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 28);
@@ -136,21 +136,22 @@ namespace zad1
             this.filepathB.UseVisualStyleBackColor = true;
             this.filepathB.Click += new System.EventHandler(this.FilepathB_Click);
             // 
-            // label3
+            // encryptB
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 236);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "label3";
+            this.encryptB.Location = new System.Drawing.Point(79, 201);
+            this.encryptB.Name = "encryptB";
+            this.encryptB.Size = new System.Drawing.Size(75, 41);
+            this.encryptB.TabIndex = 11;
+            this.encryptB.Text = "Encrypt";
+            this.encryptB.UseVisualStyleBackColor = true;
+            this.encryptB.Click += new System.EventHandler(this.EncryptB_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 437);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.encryptB);
             this.Controls.Add(this.filepathB);
             this.Controls.Add(this.filepathL);
             this.Controls.Add(this.filepathTB);
@@ -174,14 +175,14 @@ namespace zad1
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label helloWorldLabel;
-        public System.Windows.Forms.Label label1;
-        public System.Windows.Forms.Label label2;
-        public System.Windows.Forms.TextBox keyTB;
-        public System.Windows.Forms.Label ketL;
-        public System.Windows.Forms.TextBox filepathTB;
-        public System.Windows.Forms.Label filepathL;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox keyTB;
+        private System.Windows.Forms.Label ketL;
+        private System.Windows.Forms.TextBox filepathTB;
+        private System.Windows.Forms.Label filepathL;
         private System.Windows.Forms.Button filepathB;
-        public System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button encryptB;
     }
 }
 

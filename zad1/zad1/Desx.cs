@@ -28,7 +28,7 @@ namespace zad1
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach(byte b in ar)
+            foreach (byte b in ar)
                 sb.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
 
             return sb.ToString();
@@ -39,11 +39,11 @@ namespace zad1
             if (s.Length % 8 != 0)
                 throw new Exception();
 
-            for(int i=0; i<s.Length; )
+            for (int i = 0; i < s.Length;)
             {
                 string sb = "";
 
-                for(int j=0; j<8; i++, j++)
+                for (int j = 0; j < 8; i++, j++)
                     sb += s[i];
 
                 file.Add(Convert.ToByte(sb, 2));
