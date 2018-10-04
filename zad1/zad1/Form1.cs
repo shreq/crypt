@@ -40,10 +40,19 @@ namespace zad1
             label1.Text = dx.key_s; /**/
         }
 
-        private void FilepathTB_TextChanged(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             dx.filepath_s = filepathTB.Text;
-            label2.Text = dx.filepath_s; /**/
+
+            try
+            {
+                dx.LoadFile();
+                label2.Text = dx.BytesToString(dx.file_b);
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
         }
     }
 }

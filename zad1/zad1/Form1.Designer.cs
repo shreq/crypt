@@ -37,12 +37,13 @@ namespace zad1
             this.ketL = new System.Windows.Forms.Label();
             this.filepathTB = new System.Windows.Forms.TextBox();
             this.filepathL = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(123, 270);
+            this.linkLabel1.Location = new System.Drawing.Point(123, 192);
             this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(284, 13);
@@ -53,7 +54,7 @@ namespace zad1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(218, 240);
+            this.button1.Location = new System.Drawing.Point(218, 162);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 28);
@@ -66,7 +67,7 @@ namespace zad1
             // 
             this.helloWorldLabel.AutoSize = true;
             this.helloWorldLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helloWorldLabel.Location = new System.Drawing.Point(231, 9);
+            this.helloWorldLabel.Location = new System.Drawing.Point(234, 18);
             this.helloWorldLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.helloWorldLabel.Name = "helloWorldLabel";
             this.helloWorldLabel.Size = new System.Drawing.Size(64, 26);
@@ -76,7 +77,7 @@ namespace zad1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 190);
+            this.label1.Location = new System.Drawing.Point(76, 124);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -85,7 +86,7 @@ namespace zad1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(76, 203);
+            this.label2.Location = new System.Drawing.Point(76, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 5;
@@ -93,7 +94,7 @@ namespace zad1
             // 
             // keyTB
             // 
-            this.keyTB.Location = new System.Drawing.Point(132, 62);
+            this.keyTB.Location = new System.Drawing.Point(105, 60);
             this.keyTB.Name = "keyTB";
             this.keyTB.Size = new System.Drawing.Size(321, 20);
             this.keyTB.TabIndex = 6;
@@ -102,7 +103,7 @@ namespace zad1
             // ketL
             // 
             this.ketL.AutoSize = true;
-            this.ketL.Location = new System.Drawing.Point(76, 65);
+            this.ketL.Location = new System.Drawing.Point(49, 63);
             this.ketL.Name = "ketL";
             this.ketL.Size = new System.Drawing.Size(28, 13);
             this.ketL.TabIndex = 7;
@@ -110,26 +111,36 @@ namespace zad1
             // 
             // filepathTB
             // 
-            this.filepathTB.Location = new System.Drawing.Point(132, 88);
+            this.filepathTB.Location = new System.Drawing.Point(105, 86);
             this.filepathTB.Name = "filepathTB";
             this.filepathTB.Size = new System.Drawing.Size(321, 20);
             this.filepathTB.TabIndex = 8;
-            this.filepathTB.TextChanged += new System.EventHandler(this.FilepathTB_TextChanged);
             // 
             // filepathL
             // 
             this.filepathL.AutoSize = true;
-            this.filepathL.Location = new System.Drawing.Point(76, 91);
+            this.filepathL.Location = new System.Drawing.Point(49, 89);
             this.filepathL.Name = "filepathL";
             this.filepathL.Size = new System.Drawing.Size(50, 13);
             this.filepathL.TabIndex = 9;
             this.filepathL.Text = "File path:";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(432, 86);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(70, 20);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "load";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(563, 437);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.filepathL);
             this.Controls.Add(this.filepathTB);
             this.Controls.Add(this.ketL);
@@ -158,6 +169,7 @@ namespace zad1
         public System.Windows.Forms.Label ketL;
         public System.Windows.Forms.TextBox filepathTB;
         public System.Windows.Forms.Label filepathL;
+        private System.Windows.Forms.Button button2;
     }
 }
 
