@@ -34,7 +34,7 @@ namespace zad1
             return sb.ToString();
         }
 
-        public void Chopper(string s)
+        public void Chopper(string s, List<byte> l)
         {
             if (s.Length % 8 != 0)
                 throw new Exception();
@@ -46,7 +46,7 @@ namespace zad1
                 for (int j = 0; j < 8; i++, j++)
                     sb += s[i];
 
-                file.Add(Convert.ToByte(sb, 2));
+                l.Add(Convert.ToByte(sb, 2));
             }
         }
     }

@@ -25,9 +25,10 @@ namespace zad1
             System.Diagnostics.Process.Start("http://aka.ms/dotnet-get-started-desktop");
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void HelpB_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Aye!");
+            MessageBox.Show("1. Key in binary\n" +
+                            "2. Yeet!");
         }
 
         private void KeyTB_TextChanged(object sender, EventArgs e)
@@ -43,7 +44,7 @@ namespace zad1
             try
             {
                 dx.LoadFile();
-                dx.Chopper(dx.BytesToString(dx.file_b));
+                dx.Chopper(dx.BytesToString(dx.file_b), dx.file);
                 label2.Text = dx.BytesToString(dx.file_b); /**/
             }
             catch(Exception x)
@@ -56,7 +57,7 @@ namespace zad1
         {
             try
             {
-                dx.Chopper(dx.key_s);
+                dx.Chopper(dx.key_s, dx.key);
             }
             catch(Exception x)
             {
