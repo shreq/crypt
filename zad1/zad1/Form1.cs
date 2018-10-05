@@ -27,7 +27,7 @@ namespace zad1
 
         private void HelpB_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1. Key in binary\n" +
+            MessageBox.Show("1. Key should be written in binary system with 64 bits\n" +
                             "2. Yeet!");
         }
 
@@ -45,7 +45,8 @@ namespace zad1
             {
                 dx.LoadFile();
                 dx.Chopper(dx.BytesToString(dx.file_b), dx.file);
-                label2.Text = dx.BytesToString(dx.file_b); /**/
+                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
+                label1.Text = Convert.ToString(dx.file.Last(), 2);
             }
             catch(Exception x)
             {
@@ -57,7 +58,8 @@ namespace zad1
         {
             try
             {
-                dx.Chopper(dx.key_s, dx.key);
+                //dx.Chopper(dx.key_s, dx.key);
+                dx.Encrypt();
             }
             catch(Exception x)
             {
