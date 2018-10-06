@@ -44,7 +44,7 @@ namespace zad1
             try
             {
                 dx.LoadFile();
-                dx.Chopper(dx.BytesToString(dx.file_b), dx.file);
+                dx.ChopperByte(dx.BytesToString(dx.file_b), dx.file);
                 label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
                 label1.Text = Convert.ToString(dx.file.Last(), 2);
             }
@@ -58,8 +58,9 @@ namespace zad1
         {
             try
             {
-                //dx.Chopper(dx.key_s, dx.key);
+                dx.ChopperInt(dx.key_s, dx.key);
                 dx.Encrypt();
+                dx.CreateSubkeys();
             }
             catch(Exception x)
             {

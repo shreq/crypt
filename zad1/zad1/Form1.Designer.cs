@@ -87,6 +87,7 @@ namespace zad1
             this.keyTB.Name = "keyTB";
             this.keyTB.Size = new System.Drawing.Size(321, 20);
             this.keyTB.TabIndex = 6;
+            this.keyTB.Text = "00010011 00110100 01010111 01111001 10011011 10111100 11011111 11110001";
             this.keyTB.TextChanged += new System.EventHandler(this.KeyTB_TextChanged);
             // 
             // ketL
@@ -104,6 +105,7 @@ namespace zad1
             this.filepathTB.Name = "filepathTB";
             this.filepathTB.Size = new System.Drawing.Size(321, 20);
             this.filepathTB.TabIndex = 8;
+            this.filepathTB.Text = "./../../../image.jpg";
             // 
             // filepathL
             // 

@@ -33,9 +33,9 @@ namespace zad1
         public string filepath;
         public byte[] file_b;
 
-        public List<byte> key = new List<byte>();
-        public List<byte> key_pc1l = new List<byte>();
-        public List<byte> key_pc1r = new List<byte>();
+        public List<int> key = new List<int>();
+        public List<int> key_pc1l = new List<int>();
+        public List<int> key_pc1r = new List<int>();
         public List<byte> file = new List<byte>();
 
         public Desx() {}
@@ -55,7 +55,18 @@ namespace zad1
             return sb.ToString();
         }
 
-        public void Chopper(string s, List<byte> l) // chops string to bytes and packs them into list
+        public void ChopperInt(string s, List<int> l) // chops string to ints and packs them into list
+        {
+            l.Clear();
+
+            if (s.Length % 8 != 0)
+                throw new Exception();
+
+            for (int i = 0; i < s.Length; i++)
+                l.Add(Convert.ToInt32(s[i]));
+        }
+
+        public void ChopperByte(string s, List<byte> l) // chops string to bytes and packs them into list
         {
             l.Clear();
 
@@ -102,55 +113,51 @@ namespace zad1
             }
         }
 
-        public List<List<byte>> CreateSubkeys() // WIP
+        public List<List<int>> CreateSubkeys() // WIP
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
 
-            
             for (int i = 0; i < PC1.Length / 2; i++)
-                key_pc1l.Add(key[PC1[i]]);
+                key_pc1l.Add(key[PC1[i] - 1]);
             for (int i = 0; i < PC1.Length; i++)
-                key_pc1r.Add(key[PC1[i]]);
+                key_pc1r.Add(key[PC1[i] - 1]);
 
-            List<List<byte>> left_halfs = new List<List<byte>>();
-            List<List<byte>> right_halfs = new List<List<byte>>();
+            List<List<int>> left_halfs = new List<List<int>>();
+            List<List<int>> right_halfs = new List<List<int>>();
             left_halfs.Add(key_pc1l); //add original halfs at the begining for the first step
             right_halfs.Add(key_pc1r);
 
             for (int i = 1; i <= 16; i++)
             {
-                if(i==1 || i==2 || i==9 || i == 16) //shift these halfs once, rest is shifted twice
-                {
-                    left_halfs.Add(ShiftLeft(left_halfs.ElementAt(i - 1), 1));
-                }
+                if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halfs once, rest is shifted twice
+                    left_halfs.Add(ShiftLeft(left_halfs[i - 1], 1));
                 else
-                {
-                    left_halfs.Add(ShiftLeft(left_halfs.ElementAt(i - 2), 2));
-                }
+                    left_halfs.Add(ShiftLeft(left_halfs[i - 2], 2));
             }
-            List<List<byte>> pre_subkeys = new List<List<byte>>(); //list of merged, not permutated subkeys
-            List<byte> temp = new List<byte>();
+
+            List<List<int>> pre_subkeys = new List<List<int>>(); //list of merged, not permutated subkeys
+            List<int> temp = new List<int>();
+
             for (int i = 1; i <= 16; i++)
             {
-                temp = left_halfs.ElementAt(i);
-                temp.AddRange(right_halfs.ElementAt(i));
+                temp = left_halfs[i];
+                temp.AddRange(right_halfs[i]);
                 pre_subkeys.Add(temp);
             }
-            List<List<byte>> subkeys = new List<List<byte>>(pre_subkeys.Count); //permutaded subkeys
+
+            List<List<int>> subkeys = new List<List<int>>(pre_subkeys.Count); //permutated subkeys
+
             for (int i = 0; i < pre_subkeys.Count; i++)
-            {
                 for (int j = 0; j < PC2.Count(); j++)
-                {
-                    subkeys.ElementAt(i).Add(pre_subkeys.ElementAt(i).ElementAt(PC2.ElementAt(j)));
-                }
-            }
+                    subkeys[i].Add(pre_subkeys[i][PC2[j]]);
+
             return subkeys;
         }
 
-        private List<byte> ShiftLeft(List<byte> key, int shiftAmount = 1)
+        private List<int> ShiftLeft(List<int> key, int shiftAmount = 1)
         {
-            List<byte> ret = new List<byte>();
+            List<int> ret = new List<int>();
 
             for (int i = shiftAmount; i < key.Count; i++)
                 ret.Add(key[i]);
