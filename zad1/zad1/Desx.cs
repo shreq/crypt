@@ -107,11 +107,45 @@ namespace zad1
             if (key.Count % 8 != 0)
                 throw new Exception();
 
-            int i = 0;
-            for (; i < PC1.Length / 2; i++)
+            
+            for (int i = 0; i < PC1.Length / 2; i++)
                 key_pc1l.Add(key[PC1[i]]);
-            for (; i < PC1.Length; i++)
+            for (int i = 0; i < PC1.Length; i++)
                 key_pc1r.Add(key[PC1[i]]);
+
+            List<List<byte>> left_halfs = new List<List<byte>>();
+            List<List<byte>> right_halfs = new List<List<byte>>();
+            left_halfs.Add(key_pc1l); //add original halfs at the begining for the first step
+            right_halfs.Add(key_pc1r);
+
+            for (int i = 1; i <= 16; i++)
+            {
+                if(i==1 || i==2 || i==9 || i == 16) //shift these halfs once, rest is shifted twice
+                {
+                    left_halfs.Add(Shift(left_halfs.ElementAt(i - 1), 1));
+                }
+                else
+                {
+                    left_halfs.Add(Shift(left_halfs.ElementAt(i - 2), 2));
+                }
+            }
+            List<List<byte>> pre_subkeys = new List<List<byte>>(); //list of merged, not permutated subkeys
+            List<byte> temp = new List<byte>();
+            for (int i = 1; i <= 16; i++)
+            {
+                temp = left_halfs.ElementAt(i);
+                temp.AddRange(right_halfs.ElementAt(i));
+                pre_subkeys.Add(temp);
+            }
+            List<List<byte>> subkeys = new List<List<byte>>(pre_subkeys.Count); //permutaded subkeys
+            for (int i = 0; i < pre_subkeys.Count; i++)
+            {
+                for (int j = 0; j < PC2.Count(); j++)
+                {
+                    subkeys.ElementAt(i).Add(pre_subkeys.ElementAt(i).ElementAt(PC2.ElementAt(j)));
+                }
+            }
+
         }
 
         private List<byte> Shift(List<byte>key, int shiftAmount)
