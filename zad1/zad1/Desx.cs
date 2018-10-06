@@ -114,22 +114,15 @@ namespace zad1
                 key_pc1r.Add(key[PC1[i]]);
         }
 
-        private List<byte> Shift(List<byte>key, int shiftAmount)
+        private List<byte> ShiftLeft(List<byte> key, int shiftAmount = 1)
         {
             List<byte> ret = new List<byte>();
+
             for (int i = shiftAmount; i < key.Count; i++)
-            {
-                ret.Add(key.ElementAt(i));
-            }            
-            if (shiftAmount == 1)
-            {
-                ret.Add(key.ElementAt(0));
-            }
-            else
-            {
-                ret.Add(key.ElementAt(0));
-                ret.Add(key.ElementAt(1));
-            }
+                ret.Add(key[i]);
+            for (int i = 0; i < shiftAmount; i++)
+                ret.Add(key[i]);
+
             return ret;
         }
     }
