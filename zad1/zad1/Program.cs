@@ -10,7 +10,7 @@ using System.Windows.Forms;
  * chapter 12, p.370
  *
  * algorithm explanation:
- * - DES is symetric, ie. same algorithm and key are used to both encrypt/decrypt
+ * - DES is symetric, i.e. same algorithm and key are used to both encrypt/decrypt
  * - encrypts data in 64 bit blocks
  * - key length = 56 bits, expressed with 64 bits with every 8th one being parity check; 64 bits = 8 bytes
  */

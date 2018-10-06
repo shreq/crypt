@@ -28,7 +28,8 @@ namespace zad1
         private void HelpB_Click(object sender, EventArgs e)
         {
             MessageBox.Show("1. Key should be written in binary system with 64 bits\n" +
-                            "2. Yeet!");
+                            "2. Yeet!",
+                            "Help");
         }
 
         private void KeyTB_TextChanged(object sender, EventArgs e)
@@ -59,8 +60,8 @@ namespace zad1
             try
             {
                 dx.ChopperInt(dx.key_s, dx.key);
-                dx.Encrypt();
                 dx.CreateSubkeys();
+                dx.Encrypt();
             }
             catch(Exception x)
             {

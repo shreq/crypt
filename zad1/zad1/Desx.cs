@@ -29,6 +29,16 @@ namespace zad1
             44, 49, 39, 56, 34, 53,
             46, 42, 50, 36, 29, 32 };
 
+        public readonly int[] IP = {
+            58, 50, 42, 34, 26, 18, 10,  2,
+            60, 52, 44, 36, 28, 20, 12,  4,
+            62, 54, 46, 38, 30, 22, 14,  6,
+            64, 56, 48, 40, 32, 24, 16,  8,
+            57, 49, 41, 33, 25, 17,  9,  1,
+            59, 51, 43, 35, 27, 19, 11,  3,
+            61, 53, 45, 37, 29, 21, 13,  5,
+            63, 55, 47, 39, 31, 23, 15,  7 };
+
         public string key_s;
         public string filepath;
         public byte[] file_b;
@@ -95,6 +105,7 @@ namespace zad1
             if (file.Count % 8 != 0)
                 throw new Exception();
 
+            /* CHANGE IT
             List<byte> bl = new List<byte>();
             List<byte> br = new List<byte>();
 
@@ -109,13 +120,15 @@ namespace zad1
                     br.Add(file[i + 4]);
                 }
             }
+            */
         }
 
-        public List<List<int>> CreateSubkeys() // WIP
+        public List<List<int>> CreateSubkeys()
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
 
+        // Permuted Choice 1, split into left and right
             List<int> key_pc1l = new List<int>();
             List<int> key_pc1r = new List<int>();
 
@@ -124,46 +137,51 @@ namespace zad1
             for (int i = PC1.Length / 2; i < PC1.Length; i++)
                 key_pc1r.Add(key[PC1[i] - 1]);
 
-            List<List<int>> left_halfs = new List<List<int>>();
-            List<List<int>> right_halfs = new List<List<int>>();
-            left_halfs.Add(key_pc1l); //add original halfs at the begining for the first step
-            right_halfs.Add(key_pc1r);
+        // next, create 16 blocks based on previous ones with specific bit shifts
+            List<List<int>> left_halves = new List<List<int>>();
+            List<List<int>> right_halves = new List<List<int>>();
+
+            left_halves.Add(key_pc1l); //add original halves at the beginning for the first step
+            right_halves.Add(key_pc1r);
 
             for (int i = 1; i <= 16; i++)
             {
-                if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halfs once, rest is shifted twice
+                if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halves once, rest is shifted twice
                 {
-                    left_halfs.Add(ShiftLeft(left_halfs[i - 1], 1));
-                    right_halfs.Add(ShiftLeft(right_halfs[i - 1], 1));
+                    left_halves.Add(ShiftLeft(left_halves[i - 1]));
+                    right_halves.Add(ShiftLeft(right_halves[i - 1]));
                 }
                 else
                 {
-                    left_halfs.Add(ShiftLeft(left_halfs[i - 2], 2));
-                    right_halfs.Add(ShiftLeft(right_halfs[i - 2], 2));
+                    left_halves.Add(ShiftLeft(left_halves[i - 2], 2));
+                    right_halves.Add(ShiftLeft(right_halves[i - 2], 2));
                 }
             }
 
-            List<List<int>> pre_subkeys = new List<List<int>>(); //list of merged, not permutated subkeys
+        // now merge left and right halves
+            List<List<int>> pre_subkeys = new List<List<int>>(); //list of merged, not permuted subkeys
             List<int> temp = new List<int>();
 
             for (int i = 1; i <= 16; i++)
             {
-                temp = left_halfs[i];
-                temp.AddRange(right_halfs[i]);
+                temp = left_halves[i];
+                temp.AddRange(right_halves[i]);
                 pre_subkeys.Add(temp);
             }
 
-            List<List<int>> subkeys = new List<List<int>>(pre_subkeys.Count); //permutated subkeys
+        // Permuted Choice 2
+            List<List<int>> subkeys = new List<List<int>>(pre_subkeys.Count); //permuted subkeys
 
             for (int i = 0; i < pre_subkeys.Count; i++)
             {
                 List<int> subkey = new List<int>();
+
                 for (int j = 0; j < PC2.Count(); j++)
-                {
-                    subkey.Add(pre_subkeys[i][PC2[j]-1]);
-                }
+                    subkey.Add(pre_subkeys[i][PC2[j] - 1]);
+
                 subkeys.Add(subkey);
             }
+
             return subkeys;
         }
 
