@@ -73,7 +73,7 @@ namespace zad1
             }
         }
 
-        public void FillUp64(List<byte> l) // in order to encrypt the message it has to be multiple of 64 bits, i.e. 8 bytes
+        public void FillUp64(List<byte> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
         {
             while (l.Count() % 8 != 0)
                 l.Add(0);
@@ -102,7 +102,7 @@ namespace zad1
             }
         }
 
-        public void MakeSubkeys() // WIP
+        public void CreateSubkeys() // WIP
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
@@ -112,6 +112,25 @@ namespace zad1
                 key_pc1l.Add(key[PC1[i]]);
             for (; i < PC1.Length; i++)
                 key_pc1r.Add(key[PC1[i]]);
+        }
+
+        private List<byte> Shift(List<byte>key, int shiftAmount)
+        {
+            List<byte> ret = new List<byte>();
+            for (int i = shiftAmount; i < key.Count; i++)
+            {
+                ret.Add(key.ElementAt(i));
+            }            
+            if (shiftAmount == 1)
+            {
+                ret.Add(key.ElementAt(0));
+            }
+            else
+            {
+                ret.Add(key.ElementAt(0));
+                ret.Add(key.ElementAt(1));
+            }
+            return ret;
         }
     }
 }
