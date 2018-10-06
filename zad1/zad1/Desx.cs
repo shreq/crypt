@@ -34,8 +34,6 @@ namespace zad1
         public byte[] file_b;
 
         public List<int> key = new List<int>();
-        public List<int> key_pc1l = new List<int>();
-        public List<int> key_pc1r = new List<int>();
         public List<byte> file = new List<byte>();
 
         public Desx() {}
@@ -118,6 +116,9 @@ namespace zad1
             if (key.Count % 8 != 0)
                 throw new Exception();
 
+            List<int> key_pc1l = new List<int>();
+            List<int> key_pc1r = new List<int>();
+
             for (int i = 0; i < PC1.Length / 2; i++)
                 key_pc1l.Add(key[PC1[i] - 1]);
             for (int i = PC1.Length / 2; i < PC1.Length; i++)
@@ -159,7 +160,7 @@ namespace zad1
                 List<int> subkey = new List<int>();
                 for (int j = 0; j < PC2.Count(); j++)
                 {
-                    subkey.Add(pre_subkeys[i][PC2[j]]);
+                    subkey.Add(pre_subkeys[i][PC2[j]-1]);
                 }
                 subkeys.Add(subkey);
             }
