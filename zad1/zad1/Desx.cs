@@ -122,11 +122,11 @@ namespace zad1
             {
                 if(i==1 || i==2 || i==9 || i == 16) //shift these halfs once, rest is shifted twice
                 {
-                    left_halfs.Add(Shift(left_halfs.ElementAt(i - 1), 1));
+                    left_halfs.Add(ShiftLeft(left_halfs.ElementAt(i - 1), 1));
                 }
                 else
                 {
-                    left_halfs.Add(Shift(left_halfs.ElementAt(i - 2), 2));
+                    left_halfs.Add(ShiftLeft(left_halfs.ElementAt(i - 2), 2));
                 }
             }
             List<List<byte>> pre_subkeys = new List<List<byte>>(); //list of merged, not permutated subkeys
