@@ -102,7 +102,7 @@ namespace zad1
             }
         }
 
-        public void CreateSubkeys() // WIP
+        public List<List<byte>> CreateSubkeys() // WIP
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
@@ -145,7 +145,7 @@ namespace zad1
                     subkeys.ElementAt(i).Add(pre_subkeys.ElementAt(i).ElementAt(PC2.ElementAt(j)));
                 }
             }
-
+            return subkeys;
         }
 
         private List<byte> ShiftLeft(List<byte> key, int shiftAmount = 1)
