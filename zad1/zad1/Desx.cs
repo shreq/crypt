@@ -63,7 +63,7 @@ namespace zad1
                 throw new Exception();
 
             for (int i = 0; i < s.Length; i++)
-                l.Add(Convert.ToInt32(s[i]));
+                l.Add(Convert.ToInt32(s[i]) - '0');
         }
 
         public void ChopperByte(string s, List<byte> l) // chops string to bytes and packs them into list
