@@ -120,7 +120,7 @@ namespace zad1
 
             for (int i = 0; i < PC1.Length / 2; i++)
                 key_pc1l.Add(key[PC1[i] - 1]);
-            for (int i = 0; i < PC1.Length; i++)
+            for (int i = PC1.Length / 2; i < PC1.Length; i++)
                 key_pc1r.Add(key[PC1[i] - 1]);
 
             List<List<int>> left_halfs = new List<List<int>>();
@@ -131,9 +131,15 @@ namespace zad1
             for (int i = 1; i <= 16; i++)
             {
                 if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halfs once, rest is shifted twice
+                {
                     left_halfs.Add(ShiftLeft(left_halfs[i - 1], 1));
+                    right_halfs.Add(ShiftLeft(right_halfs[i - 1], 1));
+                }
                 else
+                {
                     left_halfs.Add(ShiftLeft(left_halfs[i - 2], 2));
+                    right_halfs.Add(ShiftLeft(right_halfs[i - 2], 2));
+                }
             }
 
             List<List<int>> pre_subkeys = new List<List<int>>(); //list of merged, not permutated subkeys
@@ -149,9 +155,14 @@ namespace zad1
             List<List<int>> subkeys = new List<List<int>>(pre_subkeys.Count); //permutated subkeys
 
             for (int i = 0; i < pre_subkeys.Count; i++)
+            {
+                List<int> subkey = new List<int>();
                 for (int j = 0; j < PC2.Count(); j++)
-                    subkeys[i].Add(pre_subkeys[i][PC2[j]]);
-
+                {
+                    subkey.Add(pre_subkeys[i][PC2[j]]);
+                }
+                subkeys.Add(subkey);
+            }
             return subkeys;
         }
 
