@@ -45,7 +45,7 @@ namespace zad1
             try
             {
                 dx.LoadFile();
-                dx.ChopperByte(dx.BytesToString(dx.file_b), dx.file);
+                dx.ChopperInt(dx.BytesToString(dx.file_b), dx.file);
                 label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
                 label1.Text = Convert.ToString(dx.file.Last(), 2);
             }

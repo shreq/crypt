@@ -44,7 +44,7 @@ namespace zad1
         public byte[] file_b;
 
         public List<int> key = new List<int>();
-        public List<byte> file = new List<byte>();
+        public List<int> file = new List<int>();
 
         public Desx() {}
 
@@ -74,7 +74,7 @@ namespace zad1
                 l.Add(Convert.ToInt32(s[i]) - '0');
         }
 
-        public void ChopperByte(string s, List<byte> l) // chops string to bytes and packs them into list
+        public void ChopperByte(string s, List<byte> l) // DEPRECATED // chops string to bytes and packs them into list
         {
             l.Clear();
 
@@ -92,9 +92,9 @@ namespace zad1
             }
         }
 
-        public void FillUp64(List<byte> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
+        public void FillUp64(List<int> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
         {
-            while (l.Count() % 8 != 0)
+            while (l.Count() % 64 != 0)
                 l.Add(0);
         }
 
@@ -105,22 +105,23 @@ namespace zad1
             if (file.Count % 8 != 0)
                 throw new Exception();
 
-            /* CHANGE IT
-            List<byte> bl = new List<byte>();
-            List<byte> br = new List<byte>();
 
-            for (int i = 0; i < file.Count; i += 4)
+
+            /*/ CHANGE IT
+            List<int> bl = new List<int>();
+            List<int> br = new List<int>();
+
+            for (int i = 0; i < file.Count; i += 32)
             {
                 bl.Clear();
                 br.Clear();
 
-                for (int j = 0; j < 4; i++, j++)
+                for (int j = 0; j < 32; i++, j++)
                 {
                     bl.Add(file[i]);
-                    br.Add(file[i + 4]);
+                    br.Add(file[i + 32]);
                 }
-            }
-            */
+            }*/
         }
 
         public List<List<int>> CreateSubkeys()
