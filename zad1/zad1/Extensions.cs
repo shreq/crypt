@@ -30,7 +30,7 @@ namespace zad1
 
         }
 
-        public static void XorWithList(List<int> collection, List<int> xor)
+        public static void XorWithList(List<bool> collection, List<bool> xor)
         {
             if (!collection.Count().Equals(xor.Count())){
                 throw new Exception();

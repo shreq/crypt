@@ -34,8 +34,8 @@ namespace zad1
 
         private void KeyTB_TextChanged(object sender, EventArgs e)
         {
-            dx.key_s = keyTB.Text.Replace(" ", "");
-            label1.Text = dx.key_s; /**/
+            dx.keyString = keyTB.Text.Replace(" ", "");
+            label1.Text = dx.keyString; /**/
         }
 
         private void FilepathB_Click(object sender, EventArgs e)
@@ -45,9 +45,9 @@ namespace zad1
             try
             {
                 dx.LoadFile();
-                dx.ChopperInt(dx.BytesToString(dx.file_b), dx.file);
+                dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
                 label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
-                label1.Text = Convert.ToString(dx.file.Last(), 2);
+                label1.Text = Convert.ToString(dx.file.Last());
             }
             catch(Exception x)
             {
@@ -59,9 +59,8 @@ namespace zad1
         {
             try
             {
-                dx.ChopperInt(dx.key_s, dx.key);
-                dx.CreateSubkeys();
-                dx.Encrypt("plik.jp2");
+                dx.ConvertIntoBoolList(dx.keyString, dx.key);
+                dx.Decrypt();
             }
             catch(Exception x)
             {
