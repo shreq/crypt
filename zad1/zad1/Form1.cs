@@ -61,7 +61,7 @@ namespace zad1
             {
                 dx.ChopperInt(dx.key_s, dx.key);
                 dx.CreateSubkeys();
-                dx.Encrypt();
+                dx.Encrypt("plik.jp2");
             }
             catch(Exception x)
             {

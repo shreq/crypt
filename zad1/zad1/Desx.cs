@@ -68,57 +68,128 @@ namespace zad1
                 l.Add(0);
         }
 
-        public void Encrypt() //WIP
+        public void Encrypt(string filename) //WIP
         {
             FillUp64(file);
 
             if (file.Count % 8 != 0)
                 throw new Exception();
 
-            foreach (var chunk in file.Split(64))
+            String chuje = "0000000100100011010001010110011110001001101010111100110111101111";
+            String result = "";
+            List<int> ayaya = new List<int>();
+            foreach(char bit in chuje)
             {
-                EncryptChunk(chunk);
+                ayaya.Add(Convert.ToInt32(bit)-'0');
             }
+            foreach (var chunk in ayaya.Split(64))
+            {
+                foreach(int bit in EncryptChunk(chunk))
+                {
+                    result += bit.ToString();
+                }
+            }
+
+            System.IO.File.WriteAllText(@".\siema.jp2", result);
         }
 
-        private void EncryptChunk(List<int> chunk)
+        private List<int> EncryptChunk(List<int> chunk)
         {
             chunk = InitialPermutation(chunk);
             List<List<int>> halves = chunk.Split(32);
             List<List<int>> subkeys = this.CreateSubkeys();
             for (int i = 0; i < 16; i++)
             {
-                halves[0].XorWithList(Feistel(halves[1], subkeys[i]));
+                Extensions.XorWithList(halves[0], Feistel(halves[1], subkeys[i]));
                 SwapLists(halves[0], halves[1]);
             }
+            chunk = halves[1].Concat(halves[0]).ToList();
+            return FinalPermutation(chunk);
+        }
+
+        private List<int> FinalPermutation(List<int> chunk)
+        {
+            List<int> permutedChunk = new List<int>();
+            for (int i = 0; i < 64; i++)
+            {
+                permutedChunk.Add(chunk[FP[i] - 1]);
+            }
+            return permutedChunk;
         }
 
         private void SwapLists(List<int> list1, List<int> list2)
         {
-            var temp = list1;
-            list1 = list2;
-            list2 = temp;
+            List<int> temp = new List<int>(list1);
+            list1.Clear();
+            list1.AddRange(list2);
+            list2.Clear();
+            list2.AddRange(temp);
         }
 
         private List<int> Feistel(List<int> halfBlock, List<int> subKey)
         {
+            //ok
             List<int> result = Expand(halfBlock);
-            result.XorWithList(subKey);
-            SboxSubstitution(result);
-            PboxPermutation(result);
-            return halfBlock;
+            //ok
+            Extensions.XorWithList(result, subKey);
+            result = SboxSubstitution(result);
+            return PboxPermutation(result);
         }
 
-        private void PboxPermutation(List<int> result)
+        private List<int> PboxPermutation(List<int> halfBlock)
         {
-            throw new NotImplementedException();
+            List<int> permutedChunk = new List<int>();
+            for (int i = 0; i < 32; i++)
+            {
+                permutedChunk.Add(halfBlock[P[i] - 1]);
+            }
+            return permutedChunk;
         }
 
-        private void SboxSubstitution(List<int> halfBlock)
+        private List<int> SboxSubstitution(List<int> expandedHalfBlock)
         {
-            throw new NotImplementedException();
+            int boxCounter = 0;
+            List<int> mixedBlock = new List<int>();
+            foreach(var sixBitBlock in expandedHalfBlock.Split(6))
+            {
+                int index = CalculateSboxIndex(sixBitBlock);
+                int substitutedValue = S[boxCounter++][index];
+                FillWithValueBits(mixedBlock, substitutedValue);
+            }
+            return mixedBlock;
         }
 
+        private void FillWithValueBits(List<int> mixedBlock, int substitutedValue)
+        {
+            String substitutedValueString = Convert.ToString(substitutedValue, 2).PadLeft(4, '0');
+            foreach (char bit in substitutedValueString)
+            {
+                mixedBlock.Add(Convert.ToInt32(bit)-'0');
+            }
+        }
+
+        private int CalculateSboxIndex(List<int> sixBitBlock)
+        {
+            String rowString = "";
+            String columnString = "";
+            for(int i=0; i<6; i++)
+            {
+                if(i == 0 || i == 5)
+                {
+                    rowString += sixBitBlock[i].ToString();
+                }
+                else
+                {
+                    columnString += sixBitBlock[i].ToString();
+                }
+            }
+            int row = Convert.ToInt32(rowString, 2);
+            int column = Convert.ToInt32(columnString, 2);
+
+            return row * 16 + column;
+        }
+
+        //dziala
         private List<int> Expand(List<int> halfBlock)
         {
             List<int> expandedBlock = new List<int>();
@@ -164,13 +235,13 @@ namespace zad1
             {
                 if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halves once, rest is shifted twice
                 {
-                    left_halves.Add(ShiftLeft(left_halves[i - 1]));
-                    right_halves.Add(ShiftLeft(right_halves[i - 1]));
+                    left_halves.Add(ShiftLeft(left_halves[i - 1], 1));
+                    right_halves.Add(ShiftLeft(right_halves[i - 1], 1));
                 }
                 else
                 {
-                    left_halves.Add(ShiftLeft(left_halves[i - 2], 2));
-                    right_halves.Add(ShiftLeft(right_halves[i - 2], 2));
+                    left_halves.Add(ShiftLeft(left_halves[i - 1], 2));
+                    right_halves.Add(ShiftLeft(right_halves[i - 1], 2));
                 }
             }
 
@@ -201,7 +272,7 @@ namespace zad1
             return subkeys;
         }
 
-        private List<int> ShiftLeft(List<int> key, int shiftAmount = 1)
+        private List<int> ShiftLeft(List<int> key, int shiftAmount)
         {
             List<int> ret = new List<int>();
 
@@ -303,6 +374,28 @@ namespace zad1
                  7, 11,  4,  1,  9, 12, 14,  2,  0,  6, 10, 13, 15,  3,  5,  8,
                  2,  1, 14,  7,  4, 10,  8, 13, 15, 12,  9,  0,  3,  5,  6, 11
             }
+        };
+
+        public readonly int[] P = {
+            16,  7, 20, 21,
+            29, 12, 28, 17,
+            1, 15, 23, 26,
+            5, 18, 31, 10,
+            2,  8, 24, 14,
+            32, 27,  3,  9,
+            19, 13, 30,  6,
+            22, 11,  4, 25
+        };
+
+        public readonly int[] FP = {
+            40,  8, 48, 16, 56, 24, 64, 32,
+            39,  7, 47, 15, 55, 23, 63, 31,
+            38,  6, 46, 14, 54, 22, 62, 30,
+            37,  5, 45, 13, 53, 21, 61, 29,
+            36,  4, 44, 12, 52, 20, 60, 28,
+            35,  3, 43, 11, 51, 19, 59, 27,
+            34,  2, 42, 10, 50, 18, 58, 26,
+            33,  1, 41,  9, 49, 17, 57, 25
         };
     }
 }
