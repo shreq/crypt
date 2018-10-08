@@ -30,10 +30,15 @@ namespace zad1
 
         }
 
-        public static List<T> XorWithList<T>(this IEnumerable<T> collection, IEnumerable<T> xor)
+        public static void XorWithList(List<int> collection, List<int> xor)
         {
-            // TODO zaimplementowac xorowanie
-            throw new NotImplementedException();
+            if (!collection.Count().Equals(xor.Count())){
+                throw new Exception();
+            }
+            for (int i = 0; i < collection.Count(); i++)
+            {
+                collection[i] ^= xor[i];
+            }
         }
     }
 }
