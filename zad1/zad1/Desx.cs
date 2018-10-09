@@ -16,6 +16,8 @@ namespace zad1
         public List<bool> key = new List<bool>();
         public List<bool> file = new List<bool>();
         private List<List<bool>> subKeys = new List<List<bool>>();
+        public List<bool> xKey1 = new List<bool>();
+        public List<bool> xKey2 = new List<bool>();
 
         public Desx() { }
 
@@ -120,6 +122,7 @@ namespace zad1
 
         private List<bool> CryptChunk(List<bool> chunk)
         {
+            Extensions.XorWithList(chunk, this.xKey1);
             chunk = InitialPermutation(chunk);
             List<List<bool>> halves = chunk.Split(32);
             for (int i = 0; i < 16; i++)
@@ -128,7 +131,9 @@ namespace zad1
                 SwapLists(halves[0], halves[1]);
             }
             chunk = halves[1].Concat(halves[0]).ToList();
-            return FinalPermutation(chunk);
+            chunk = FinalPermutation(chunk);
+            Extensions.XorWithList(chunk, this.xKey2);
+            return chunk;
         }
 
         private List<bool> FinalPermutation(List<bool> chunk)

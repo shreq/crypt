@@ -60,6 +60,7 @@ namespace zad1
             try
             {
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
+                dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
             }
             catch(Exception x)
