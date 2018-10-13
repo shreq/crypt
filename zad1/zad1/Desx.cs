@@ -103,7 +103,7 @@ namespace zad1
             List<byte> result_bytes = new List<byte>();
             ChopperByte(Crypt(file), result_bytes);
 
-            /**/
+            /*
             string result_string = BytesToString(result_bytes.ToArray());
             List<bool> result_bool = new List<bool>();
             ConvertIntoBoolList(result_string, result_bool);
@@ -111,12 +111,12 @@ namespace zad1
             for (int i = 0; i < result_bool.Count; i++)
                 result_string += (result_bool[i] ? '1' : '0');
             ChopperByte(result_string, result_bytes);
-            /**/
+            */
 
             System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
         }
 
-        private string Crypt(List<bool> data) // ???
+        private string Crypt(List<bool> data) // crypts whole file
         {
             string result = "";
 
@@ -129,17 +129,17 @@ namespace zad1
 
         private List<bool> CryptChunk(List<bool> chunk) // crypts 64 bit chunk of message
         {
-            Extensions.XorWithList(chunk, this.xKey1);
+            Extensions.XorWithList(chunk, this.xKey1);      // extra XOR
             chunk = InitialPermutation(chunk);
             List<List<bool>> halves = chunk.Split(32);
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)                    // encryption
             {
                 Extensions.XorWithList(halves[0], Feistel(halves[1], this.subKeys[i]));
                 SwapLists(halves[0], halves[1]);
             }
 
-            chunk = halves[1].Concat(halves[0]).ToList();
+            chunk = halves[1].Concat(halves[0]).ToList();   // extra XOR
             chunk = FinalPermutation(chunk);
             Extensions.XorWithList(chunk, this.xKey2);
 
