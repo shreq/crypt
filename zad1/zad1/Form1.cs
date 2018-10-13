@@ -61,6 +61,20 @@ namespace zad1
             {
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
                 dx.xKey1 = dx.xKey2 = dx.key;
+                dx.Encrypt();
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
+        }
+
+        private void DecryptB_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dx.ConvertIntoBoolList(dx.keyString, dx.key);
+                dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
             }
             catch(Exception x)

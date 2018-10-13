@@ -19,7 +19,7 @@ namespace zad1
         public List<bool> xKey1 = new List<bool>();
         public List<bool> xKey2 = new List<bool>();
 
-        public Desx() { }
+        public Desx() {}
 
         public void LoadFile()
         {
@@ -36,7 +36,7 @@ namespace zad1
             return sb.ToString();
         }
 
-        public void ConvertIntoBoolList(string s, List<bool> l) // chops string to bools and packs them boolo list
+        public void ConvertIntoBoolList(string s, List<bool> l) // chops string to bools and packs them into list
         {
             l.Clear();
 
@@ -47,7 +47,7 @@ namespace zad1
                 l.Add(Convert.ToBoolean(Convert.ToInt32(Convert.ToInt32(s[i]) - '0')));
         }
 
-        public void ChopperByte(string s, List<byte> l) // DEPRECATED // chops string to bytes and packs them boolo list
+        private void ChopperByte(string s, List<byte> l) // DEPRECATED // chops string to bytes and packs them into list
         {
             l.Clear();
 
@@ -65,7 +65,7 @@ namespace zad1
             }
         }
 
-        public void FillUp64(List<bool> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
+        private void FillUp64(List<bool> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
         {
             while (l.Count() % 64 != 0)
                 l.Add(false);
@@ -79,44 +79,43 @@ namespace zad1
             if (file.Count % 8 != 0)
                 throw new Exception();
 
-            String chuje = "0000000100100011010001010110011110001001101010111100110111101111";
+            string asd = "0000000100100011010001010110011110001001101010111100110111101111";
             List<bool> ayaya = new List<bool>();
-            foreach(char bit in chuje)
-            {
-                ayaya.Add(Convert.ToBoolean(Convert.ToInt32(bit)-'0'));
-            }
-
-            String result = Crypt(ayaya);
-
-            System.IO.File.WriteAllText(@".\siema.jp2", result);
-        }
-
-        public void Decrypt() //WIP usunac chuje
-        {
-            this.subKeys = CreateSubkeys();
-            this.subKeys.Reverse();
-
-            String chuje = "1000010111101000000100110101010000001111000010101011010000000101";
-            List<bool> ayaya = new List<bool>();
-            foreach (char bit in chuje)
+            foreach(char bit in asd)
             {
                 ayaya.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
             }
 
-            String result = Crypt(ayaya);
+            string result = Crypt(ayaya);
+
+            System.IO.File.WriteAllText(filepath + "xxx", result);
         }
 
-        private String Crypt(List<bool> data)
+        public void Decrypt() //WIP
         {
-            String result = "";
-            foreach (var chunk in data.Split(64))
+            this.subKeys = CreateSubkeys();
+            this.subKeys.Reverse();
+
+            string asd = "1000010111101000000100110101010000001111000010101011010000000101";
+            List<bool> ayaya = new List<bool>();
+            foreach (char bit in asd)
             {
-                List<bool> cryptedChunk = CryptChunk(chunk);
-                foreach (bool bit in cryptedChunk)
-                {
-                    result += Convert.ToInt16(bit).ToString();
-                }
+                ayaya.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
             }
+
+            string result = Crypt(ayaya);
+
+            System.IO.File.WriteAllText(filepath + "x", result);
+        }
+
+        private string Crypt(List<bool> data)
+        {
+            string result = "";
+
+            foreach (var chunk in data.Split(64))
+                foreach (bool bit in CryptChunk(chunk))
+                    result += Convert.ToInt16(bit).ToString();
+
             return result;
         }
 
@@ -125,24 +124,27 @@ namespace zad1
             Extensions.XorWithList(chunk, this.xKey1);
             chunk = InitialPermutation(chunk);
             List<List<bool>> halves = chunk.Split(32);
+
             for (int i = 0; i < 16; i++)
             {
                 Extensions.XorWithList(halves[0], Feistel(halves[1], this.subKeys[i]));
                 SwapLists(halves[0], halves[1]);
             }
+
             chunk = halves[1].Concat(halves[0]).ToList();
             chunk = FinalPermutation(chunk);
             Extensions.XorWithList(chunk, this.xKey2);
+
             return chunk;
         }
 
-        private List<bool> FinalPermutation(List<bool> chunk)
+        private List<bool> FinalPermutation(List<bool> chunk) // does FP of the message
         {
             List<bool> permutedChunk = new List<bool>();
+
             for (int i = 0; i < 64; i++)
-            {
                 permutedChunk.Add(chunk[FP[i] - 1]);
-            }
+
             return permutedChunk;
         }
 
@@ -157,9 +159,7 @@ namespace zad1
 
         private List<bool> Feistel(List<bool> halfBlock, List<bool> subKey)
         {
-            //ok
             List<bool> result = Expand(halfBlock);
-            //ok
             Extensions.XorWithList(result, subKey);
             result = SboxSubstitution(result);
             return PboxPermutation(result);
@@ -168,10 +168,10 @@ namespace zad1
         private List<bool> PboxPermutation(List<bool> halfBlock)
         {
             List<bool> permutedChunk = new List<bool>();
+
             for (int i = 0; i < 32; i++)
-            {
                 permutedChunk.Add(halfBlock[P[i] - 1]);
-            }
+
             return permutedChunk;
         }
 
@@ -179,77 +179,76 @@ namespace zad1
         {
             int boxCounter = 0;
             List<bool> mixedBlock = new List<bool>();
-            foreach(var sixBitBlock in expandedHalfBlock.Split(6))
+
+            foreach (var sixBitBlock in expandedHalfBlock.Split(6))
             {
                 int index = CalculateSboxIndex(sixBitBlock);
                 int substitutedValue = S[boxCounter++][index];
                 FillWithValueBits(mixedBlock, substitutedValue);
             }
+
             return mixedBlock;
         }
 
         private void FillWithValueBits(List<bool> mixedBlock, int substitutedValue)
         {
-            String substitutedValueString = Convert.ToString(substitutedValue, 2).PadLeft(4, '0');
+            string substitutedValueString = Convert.ToString(substitutedValue, 2).PadLeft(4, '0');
+
             foreach (char bit in substitutedValueString)
-            {
-                mixedBlock.Add(Convert.ToBoolean(Convert.ToInt32(bit)-'0'));
-            }
+                mixedBlock.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
         }
 
         private int CalculateSboxIndex(List<bool> sixBitBlock)
         {
-            String rowString = "";
-            String columnString = "";
-            for(int i=0; i<6; i++)
+            string rowString = "";
+            string columnString = "";
+
+            for (int i = 0; i < 6; i++)
             {
-                if(i == 0 || i == 5)
-                {
+                if (i == 0 || i == 5)
                     rowString += Convert.ToInt16(sixBitBlock[i]).ToString();
-                }
                 else
-                {
                     columnString += Convert.ToInt16(sixBitBlock[i]).ToString();
-                }
             }
+
             int row = Convert.ToInt32(rowString, 2);
             int column = Convert.ToInt32(columnString, 2);
 
-            return row * 16 + column;
+            return 16 * row + column;
         }
 
-        //dziala
         private List<bool> Expand(List<bool> halfBlock)
         {
             List<bool> expandedBlock = new List<bool>();
-            for(int i=0; i<48; i++)
-            {
-                expandedBlock.Add(halfBlock[E[i]-1]);
-            }
+
+            for (int i = 0; i < 48; i++)
+                expandedBlock.Add(halfBlock[E[i] - 1]);
+
             return expandedBlock;
         }
 
-        private List<bool> InitialPermutation(List<bool> chunk)
+        private List<bool> InitialPermutation(List<bool> chunk) // does IP of the message
         {
             List<bool> permutedChunk = new List<bool>();
+
             for (int i = 0; i < 64; i++)
-            {
                 permutedChunk.Add(chunk[IP[i] - 1]);
-            }
+
             return permutedChunk;
         }
 
-        public List<List<bool>> CreateSubkeys()
+        private List<List<bool>> CreateSubkeys() // create 16 subkeys with use of PC1 & PC2, each of which is 48 bits long
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
 
-            // Permuted Choice 1, split boolo left and right
+            // Permuted Choice 1, split into left and right
             List<bool> key_pc1l = new List<bool>();
             List<bool> key_pc1r = new List<bool>();
 
             for (int i = 0; i < PC1.Length / 2; i++)
                 key_pc1l.Add(key[PC1[i] - 1]);
+
             for (int i = PC1.Length / 2; i < PC1.Length; i++)
                 key_pc1r.Add(key[PC1[i] - 1]);
 
@@ -257,12 +256,12 @@ namespace zad1
             List<List<bool>> left_halves = new List<List<bool>>();
             List<List<bool>> right_halves = new List<List<bool>>();
 
-            left_halves.Add(key_pc1l); //add original halves at the beginning for the first step
+            left_halves.Add(key_pc1l); // add original halves at the beginning for the first step
             right_halves.Add(key_pc1r);
 
             for (int i = 1; i <= 16; i++)
             {
-                if (i == 1 || i == 2 || i == 9 || i == 16) //shift these halves once, rest is shifted twice
+                if (i == 1 || i == 2 || i == 9 || i == 16) // shift these halves once, rest is shifted twice
                 {
                     left_halves.Add(ShiftLeft(left_halves[i - 1], 1));
                     right_halves.Add(ShiftLeft(right_halves[i - 1], 1));
@@ -275,7 +274,7 @@ namespace zad1
             }
 
             // now merge left and right halves
-            List<List<bool>> pre_subkeys = new List<List<bool>>(); //list of merged, not permuted subkeys
+            List<List<bool>> pre_subkeys = new List<List<bool>>(); // list of merged, not permuted subkeys
             List<bool> temp = new List<bool>();
 
             for (int i = 1; i <= 16; i++)
@@ -286,7 +285,7 @@ namespace zad1
             }
 
             // Permuted Choice 2
-            List<List<bool>> subkeys = new List<List<bool>>(pre_subkeys.Count); //permuted subkeys
+            List<List<bool>> subkeys = new List<List<bool>>(pre_subkeys.Count); // permuted subkeys
 
             for (int i = 0; i < pre_subkeys.Count; i++)
             {
@@ -303,17 +302,18 @@ namespace zad1
 
         private List<bool> ShiftLeft(List<bool> key, int shiftAmount)
         {
-            List<bool> ret = new List<bool>();
+            List<bool> rot = new List<bool>();
 
             for (int i = shiftAmount; i < key.Count; i++)
-                ret.Add(key[i]);
-            for (int i = 0; i < shiftAmount; i++)
-                ret.Add(key[i]);
+                rot.Add(key[i]);
 
-            return ret;
+            for (int i = 0; i < shiftAmount; i++)
+                rot.Add(key[i]);
+
+            return rot;
         }
 
-        public readonly int[] PC1 = {
+        private readonly int[] PC1 = {
             57, 49, 41, 33, 25, 17,  9,
              1, 58, 50, 42, 34, 24, 18,
             10,  2, 59, 51, 43, 35, 27,
@@ -323,7 +323,7 @@ namespace zad1
             14,  6, 61, 53, 45, 37, 29,
             21, 13,  5, 28, 20, 12,  4 };
 
-        public readonly int[] PC2 = {
+        private readonly int[] PC2 = {
             14, 17, 11, 24,  1,  5,
              3, 28, 15,  6, 21, 10,
             23, 19, 12,  4, 26,  8,
@@ -333,7 +333,7 @@ namespace zad1
             44, 49, 39, 56, 34, 53,
             46, 42, 50, 36, 29, 32 };
 
-        public readonly int[] IP = {
+        private readonly int[] IP = {
             58, 50, 42, 34, 26, 18, 10,  2,
             60, 52, 44, 36, 28, 20, 12,  4,
             62, 54, 46, 38, 30, 22, 14,  6,
@@ -343,7 +343,7 @@ namespace zad1
             61, 53, 45, 37, 29, 21, 13,  5,
             63, 55, 47, 39, 31, 23, 15,  7 };
 
-        public readonly int[] E = {
+        private readonly int[] E = {
             32,  1,  2,  3,  4,  5,
             4,  5,  6,  7,  8,  9,
             8,  9, 10, 11, 12, 13,
@@ -354,7 +354,7 @@ namespace zad1
             28, 29, 30, 31, 32,  1
         };
 
-        public readonly int[][] S = {
+        private readonly int[][] S = {
             new int[]{
                 14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5,  9,  0,  7,
                 0, 15,  7,  4, 14,  2, 13,  1, 10,  6, 12, 11,  9,  5,  3,  8,
@@ -405,7 +405,7 @@ namespace zad1
             }
         };
 
-        public readonly int[] P = {
+        private readonly int[] P = {
             16,  7, 20, 21,
             29, 12, 28, 17,
             1, 15, 23, 26,
@@ -416,7 +416,7 @@ namespace zad1
             22, 11,  4, 25
         };
 
-        public readonly int[] FP = {
+        private readonly int[] FP = {
             40,  8, 48, 16, 56, 24, 64, 32,
             39,  7, 47, 15, 55, 23, 63, 31,
             38,  6, 46, 14, 54, 22, 62, 30,

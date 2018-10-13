@@ -38,6 +38,7 @@ namespace zad1
             this.filepathL = new System.Windows.Forms.Label();
             this.filepathB = new System.Windows.Forms.Button();
             this.encryptB = new System.Windows.Forms.Button();
+            this.decryptB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -130,17 +131,28 @@ namespace zad1
             // 
             this.encryptB.Location = new System.Drawing.Point(12, 81);
             this.encryptB.Name = "encryptB";
-            this.encryptB.Size = new System.Drawing.Size(452, 41);
+            this.encryptB.Size = new System.Drawing.Size(223, 41);
             this.encryptB.TabIndex = 11;
             this.encryptB.Text = "Encrypt";
             this.encryptB.UseVisualStyleBackColor = true;
             this.encryptB.Click += new System.EventHandler(this.EncryptB_Click);
+            // 
+            // decryptB
+            // 
+            this.decryptB.Location = new System.Drawing.Point(241, 81);
+            this.decryptB.Name = "decryptB";
+            this.decryptB.Size = new System.Drawing.Size(223, 41);
+            this.decryptB.TabIndex = 12;
+            this.decryptB.Text = "Decrypt";
+            this.decryptB.UseVisualStyleBackColor = true;
+            this.decryptB.Click += new System.EventHandler(this.DecryptB_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(476, 289);
+            this.Controls.Add(this.decryptB);
             this.Controls.Add(this.encryptB);
             this.Controls.Add(this.filepathB);
             this.Controls.Add(this.filepathL);
@@ -172,5 +184,6 @@ namespace zad1
         private System.Windows.Forms.Button filepathB;
         private System.Windows.Forms.Button encryptB;
         private System.Windows.Forms.Button helpB;
+        private System.Windows.Forms.Button decryptB;
     }
 }
