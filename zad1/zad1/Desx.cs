@@ -18,6 +18,7 @@ namespace zad1
         public List<bool> xKey1 = new List<bool>();
         public List<bool> xKey2 = new List<bool>();
         private List<List<bool>> subKeys = new List<List<bool>>();
+        private int fillBits = 0;
 
         public Desx() {}
 
@@ -47,7 +48,7 @@ namespace zad1
                 l.Add(Convert.ToBoolean(Convert.ToInt32(Convert.ToInt32(s[i]) - '0')));
         }
 
-        private void ChopperByte(string s, List<byte> l) // DEPRECATED // chops string to bytes and packs them into list
+        private void ChopperByte(string s, List<byte> l) // chops string to bytes and packs them into list
         {
             l.Clear();
 
@@ -68,7 +69,16 @@ namespace zad1
         private void FillUp64(List<bool> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
         {
             while (l.Count() % 64 != 0)
+            {
                 l.Add(false);
+                fillBits++;
+            }
+        }
+
+        private void RevertFilling(List<bool> l) // DEPRECATED
+        {
+            for (int i = 0; i < fillBits; i++)
+                l.RemoveAt(l.Count - 1);
         }
 
         public void Encrypt() // WIP
@@ -92,6 +102,16 @@ namespace zad1
 
             List<byte> result_bytes = new List<byte>();
             ChopperByte(Crypt(file), result_bytes);
+
+            /**/
+            string result_string = BytesToString(result_bytes.ToArray());
+            List<bool> result_bool = new List<bool>();
+            ConvertIntoBoolList(result_string, result_bool);
+            result_string = "";
+            for (int i = 0; i < result_bool.Count; i++)
+                result_string += (result_bool[i] ? '1' : '0');
+            ChopperByte(result_string, result_bytes);
+            /**/
 
             System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
         }
