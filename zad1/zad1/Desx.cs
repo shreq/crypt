@@ -13,11 +13,11 @@ namespace zad1
         public string filepath;
         public byte[] file_b;
 
-        public List<bool> key = new List<bool>();
         public List<bool> file = new List<bool>();
-        private List<List<bool>> subKeys = new List<List<bool>>();
+        public List<bool> key = new List<bool>();
         public List<bool> xKey1 = new List<bool>();
         public List<bool> xKey2 = new List<bool>();
+        private List<List<bool>> subKeys = new List<List<bool>>();
 
         public Desx() {}
 
@@ -71,7 +71,7 @@ namespace zad1
                 l.Add(false);
         }
 
-        public void Encrypt() //WIP
+        public void Encrypt() // WIP
         {
             FillUp64(file);
             this.subKeys = CreateSubkeys();
@@ -79,36 +79,24 @@ namespace zad1
             if (file.Count % 8 != 0)
                 throw new Exception();
 
-            string asd = "0000000100100011010001010110011110001001101010111100110111101111";
-            List<bool> ayaya = new List<bool>();
-            foreach(char bit in asd)
-            {
-                ayaya.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
-            }
+            List<byte> result_bytes = new List<byte>();
+            ChopperByte(Crypt(file), result_bytes);
 
-            string result = Crypt(ayaya);
-
-            System.IO.File.WriteAllText(filepath + "xxx", result);
+            System.IO.File.WriteAllBytes(filepath + "xxx", result_bytes.ToArray());
         }
 
-        public void Decrypt() //WIP
+        public void Decrypt() // WIP
         {
             this.subKeys = CreateSubkeys();
             this.subKeys.Reverse();
 
-            string asd = "1000010111101000000100110101010000001111000010101011010000000101";
-            List<bool> ayaya = new List<bool>();
-            foreach (char bit in asd)
-            {
-                ayaya.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
-            }
+            List<byte> result_bytes = new List<byte>();
+            ChopperByte(Crypt(file), result_bytes);
 
-            string result = Crypt(ayaya);
-
-            System.IO.File.WriteAllText(filepath + "x", result);
+            System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
         }
 
-        private string Crypt(List<bool> data)
+        private string Crypt(List<bool> data) // ???
         {
             string result = "";
 
@@ -119,7 +107,7 @@ namespace zad1
             return result;
         }
 
-        private List<bool> CryptChunk(List<bool> chunk)
+        private List<bool> CryptChunk(List<bool> chunk) // crypts 64 bit chunk of message
         {
             Extensions.XorWithList(chunk, this.xKey1);
             chunk = InitialPermutation(chunk);
@@ -148,7 +136,7 @@ namespace zad1
             return permutedChunk;
         }
 
-        private void SwapLists(List<bool> list1, List<bool> list2)
+        private void SwapLists(List<bool> list1, List<bool> list2) // swaps two lists
         {
             List<bool> temp = new List<bool>(list1);
             list1.Clear();
@@ -157,7 +145,7 @@ namespace zad1
             list2.AddRange(temp);
         }
 
-        private List<bool> Feistel(List<bool> halfBlock, List<bool> subKey)
+        private List<bool> Feistel(List<bool> halfBlock, List<bool> subKey) // ???
         {
             List<bool> result = Expand(halfBlock);
             Extensions.XorWithList(result, subKey);
@@ -165,7 +153,7 @@ namespace zad1
             return PboxPermutation(result);
         }
 
-        private List<bool> PboxPermutation(List<bool> halfBlock)
+        private List<bool> PboxPermutation(List<bool> halfBlock) // ???
         {
             List<bool> permutedChunk = new List<bool>();
 
@@ -175,7 +163,7 @@ namespace zad1
             return permutedChunk;
         }
 
-        private List<bool> SboxSubstitution(List<bool> expandedHalfBlock)
+        private List<bool> SboxSubstitution(List<bool> expandedHalfBlock) // ???
         {
             int boxCounter = 0;
             List<bool> mixedBlock = new List<bool>();
@@ -190,7 +178,7 @@ namespace zad1
             return mixedBlock;
         }
 
-        private void FillWithValueBits(List<bool> mixedBlock, int substitutedValue)
+        private void FillWithValueBits(List<bool> mixedBlock, int substitutedValue) // ???
         {
             string substitutedValueString = Convert.ToString(substitutedValue, 2).PadLeft(4, '0');
 
@@ -198,7 +186,7 @@ namespace zad1
                 mixedBlock.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
         }
 
-        private int CalculateSboxIndex(List<bool> sixBitBlock)
+        private int CalculateSboxIndex(List<bool> sixBitBlock) // ???
         {
             string rowString = "";
             string columnString = "";
@@ -217,7 +205,7 @@ namespace zad1
             return 16 * row + column;
         }
 
-        private List<bool> Expand(List<bool> halfBlock)
+        private List<bool> Expand(List<bool> halfBlock) // ???
         {
             List<bool> expandedBlock = new List<bool>();
 
@@ -237,7 +225,7 @@ namespace zad1
             return permutedChunk;
         }
 
-        private List<List<bool>> CreateSubkeys() // create 16 subkeys with use of PC1 & PC2, each of which is 48 bits long
+        private List<List<bool>> CreateSubkeys() // creates 16 subkeys with use of PC1 & PC2, each of which is 48 bits long
         {
             if (key.Count % 8 != 0)
                 throw new Exception();
@@ -300,7 +288,7 @@ namespace zad1
             return subkeys;
         }
 
-        private List<bool> ShiftLeft(List<bool> key, int shiftAmount)
+        private List<bool> ShiftLeft(List<bool> key, int shiftAmount) // shifts/rotates bits to the left
         {
             List<bool> rot = new List<bool>();
 

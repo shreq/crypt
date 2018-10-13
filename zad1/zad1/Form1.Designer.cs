@@ -106,7 +106,7 @@ namespace zad1
             this.filepathTB.Name = "filepathTB";
             this.filepathTB.Size = new System.Drawing.Size(321, 20);
             this.filepathTB.TabIndex = 8;
-            this.filepathTB.Text = "./../../../image.jpg";
+            this.filepathTB.Text = "./../../../image.png";
             // 
             // filepathL
             // 

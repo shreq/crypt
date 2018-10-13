@@ -22,23 +22,21 @@ namespace zad1
                     temp = new List<T>();
                     count = 1;
                 }
+
                 temp.Add(element);
             }
+
             chunks.Add(temp);
-
             return chunks;
-
         }
 
         public static void XorWithList(List<bool> collection, List<bool> xor)
         {
-            if (!collection.Count().Equals(xor.Count())){
+            if (!collection.Count().Equals(xor.Count()))
                 throw new Exception();
-            }
+
             for (int i = 0; i < collection.Count(); i++)
-            {
                 collection[i] ^= xor[i];
-            }
         }
     }
 }
