@@ -19,16 +19,9 @@ namespace zad1
             InitializeComponent();
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            // Click on the link below to continue learning how to build a desktop app using WinForms!
-            System.Diagnostics.Process.Start("http://aka.ms/dotnet-get-started-desktop");
-        }
-
         private void HelpB_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1. Key should be written in binary system with 64 bits\n" +
-                            "2. Yeet!",
+            MessageBox.Show("1. Key should be written in binary system with 64 bits\n",
                             "Help");
         }
 
@@ -64,7 +57,11 @@ namespace zad1
                 dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
                 //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Encrypt();
-                dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
+
+                if (textoutTB.TextLength == 0)
+                    dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
+                else
+                    textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
@@ -81,7 +78,11 @@ namespace zad1
                 dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
                 //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
-                dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
+
+                if (textoutTB.TextLength == 0)
+                    dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
+                else
+                    textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
