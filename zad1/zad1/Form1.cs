@@ -44,18 +44,10 @@ namespace zad1
 
             try
             {
-                if (!textChB.Checked)
-                {
-                    dx.LoadFile();
-                    dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
-                    label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
-                    label1.Text = Convert.ToString(dx.file.Last());
-                }
-                else
-                {
-                    dx.LoadText();
-                    dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
-                }
+                dx.LoadFile();
+                dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
+                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
+                label1.Text = Convert.ToString(dx.file.Last());
             }
             catch(Exception x)
             {
@@ -91,12 +83,21 @@ namespace zad1
             }
         }
 
-        private void TextChB_CheckedChanged(object sender, EventArgs e)
+        private void TextB_Click(object sender, EventArgs e)
         {
-            if(textChB.Checked)
-                filepathL.Text = "Text:";
-            else
-                filepathL.Text = "File path:";
+            dx.filepath = textinTB.Text;
+
+            try
+            {
+                dx.LoadFile();
+                dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
+                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
+                label1.Text = Convert.ToString(dx.file.Last());
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
         }
     }
 }

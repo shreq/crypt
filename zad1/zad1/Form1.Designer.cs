@@ -38,7 +38,10 @@ namespace zad1
             this.filepathB = new System.Windows.Forms.Button();
             this.encryptB = new System.Windows.Forms.Button();
             this.decryptB = new System.Windows.Forms.Button();
-            this.textChB = new System.Windows.Forms.CheckBox();
+            this.textinTB = new System.Windows.Forms.TextBox();
+            this.textoutTB = new System.Windows.Forms.TextBox();
+            this.textL = new System.Windows.Forms.Label();
+            this.textB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // helpB
@@ -55,7 +58,7 @@ namespace zad1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 170);
+            this.label1.Location = new System.Drawing.Point(13, 202);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -64,7 +67,7 @@ namespace zad1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 196);
+            this.label2.Location = new System.Drawing.Point(13, 228);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 5;
@@ -117,7 +120,7 @@ namespace zad1
             // 
             // encryptB
             // 
-            this.encryptB.Location = new System.Drawing.Point(13, 103);
+            this.encryptB.Location = new System.Drawing.Point(13, 135);
             this.encryptB.Name = "encryptB";
             this.encryptB.Size = new System.Drawing.Size(223, 41);
             this.encryptB.TabIndex = 11;
@@ -127,7 +130,7 @@ namespace zad1
             // 
             // decryptB
             // 
-            this.decryptB.Location = new System.Drawing.Point(242, 103);
+            this.decryptB.Location = new System.Drawing.Point(242, 135);
             this.decryptB.Name = "decryptB";
             this.decryptB.Size = new System.Drawing.Size(223, 41);
             this.decryptB.TabIndex = 12;
@@ -135,23 +138,48 @@ namespace zad1
             this.decryptB.UseVisualStyleBackColor = true;
             this.decryptB.Click += new System.EventHandler(this.DecryptB_Click);
             // 
-            // textChB
+            // textinTB
             // 
-            this.textChB.AutoSize = true;
-            this.textChB.Location = new System.Drawing.Point(406, 64);
-            this.textChB.Name = "textChB";
-            this.textChB.Size = new System.Drawing.Size(47, 17);
-            this.textChB.TabIndex = 13;
-            this.textChB.Text = "Text";
-            this.textChB.UseVisualStyleBackColor = true;
-            this.textChB.CheckedChanged += new System.EventHandler(this.TextChB_CheckedChanged);
+            this.textinTB.Location = new System.Drawing.Point(68, 64);
+            this.textinTB.Name = "textinTB";
+            this.textinTB.Size = new System.Drawing.Size(321, 20);
+            this.textinTB.TabIndex = 13;
+            // 
+            // textoutTB
+            // 
+            this.textoutTB.Location = new System.Drawing.Point(68, 90);
+            this.textoutTB.Name = "textoutTB";
+            this.textoutTB.Size = new System.Drawing.Size(321, 20);
+            this.textoutTB.TabIndex = 14;
+            // 
+            // textL
+            // 
+            this.textL.AutoSize = true;
+            this.textL.Location = new System.Drawing.Point(13, 67);
+            this.textL.Name = "textL";
+            this.textL.Size = new System.Drawing.Size(31, 13);
+            this.textL.TabIndex = 15;
+            this.textL.Text = "Text:";
+            // 
+            // textB
+            // 
+            this.textB.Location = new System.Drawing.Point(394, 64);
+            this.textB.Name = "textB";
+            this.textB.Size = new System.Drawing.Size(70, 20);
+            this.textB.TabIndex = 16;
+            this.textB.Text = "load";
+            this.textB.UseVisualStyleBackColor = true;
+            this.textB.Click += new System.EventHandler(this.TextB_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(476, 289);
-            this.Controls.Add(this.textChB);
+            this.Controls.Add(this.textB);
+            this.Controls.Add(this.textL);
+            this.Controls.Add(this.textoutTB);
+            this.Controls.Add(this.textinTB);
             this.Controls.Add(this.decryptB);
             this.Controls.Add(this.encryptB);
             this.Controls.Add(this.filepathB);
@@ -182,6 +210,9 @@ namespace zad1
         private System.Windows.Forms.Button encryptB;
         private System.Windows.Forms.Button helpB;
         private System.Windows.Forms.Button decryptB;
-        private System.Windows.Forms.CheckBox textChB;
+        private System.Windows.Forms.TextBox textinTB;
+        private System.Windows.Forms.TextBox textoutTB;
+        private System.Windows.Forms.Label textL;
+        private System.Windows.Forms.Button textB;
     }
 }
