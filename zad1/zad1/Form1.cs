@@ -90,5 +90,13 @@ namespace zad1
                 MessageBox.Show(x.Message);
             }
         }
+
+        private void TextChB_CheckedChanged(object sender, EventArgs e)
+        {
+            if(textChB.Checked)
+                filepathL.Text = "Text:";
+            else
+                filepathL.Text = "File path:";
+        }
     }
 }

@@ -144,6 +144,7 @@ namespace zad1
             this.textChB.TabIndex = 13;
             this.textChB.Text = "Text";
             this.textChB.UseVisualStyleBackColor = true;
+            this.textChB.CheckedChanged += new System.EventHandler(this.TextChB_CheckedChanged);
             // 
             // Form1
             // 
