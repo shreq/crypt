@@ -44,10 +44,18 @@ namespace zad1
 
             try
             {
-                dx.LoadFile();
-                dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
-                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
-                label1.Text = Convert.ToString(dx.file.Last());
+                if (!textChB.Checked)
+                {
+                    dx.LoadFile();
+                    dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
+                    label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
+                    label1.Text = Convert.ToString(dx.file.Last());
+                }
+                else
+                {
+                    dx.LoadText();
+                    dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
+                }
             }
             catch(Exception x)
             {
