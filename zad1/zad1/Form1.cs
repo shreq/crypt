@@ -58,7 +58,7 @@ namespace zad1
                 //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Encrypt();
 
-                if (textoutTB.TextLength == 0)
+                if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
                 else
                     textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
@@ -79,7 +79,7 @@ namespace zad1
                 //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
 
-                if (textoutTB.TextLength == 0)
+                if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
                 else
                     textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
