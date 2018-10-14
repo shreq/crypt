@@ -61,7 +61,8 @@ namespace zad1
                 if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
                 else
-                    textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
+                    //textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
+                    textoutTB.Text = System.Text.Encoding.ASCII.GetString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
@@ -82,7 +83,8 @@ namespace zad1
                 if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
                 else
-                    textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
+                    //textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
+                    textoutTB.Text = System.Text.Encoding.ASCII.GetString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
