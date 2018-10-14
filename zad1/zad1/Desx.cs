@@ -31,7 +31,7 @@ namespace zad1
 
         public void LoadText()
         {
-            file_b = System.Text.Encoding.ASCII.GetBytes(filepath) ?? throw new Exception();
+            file_b = System.Text.Encoding.Default.GetBytes(filepath) ?? throw new Exception();
         }
 
         public string BytesToString(byte[] ar)
@@ -96,6 +96,7 @@ namespace zad1
         {
             this.subKeys = CreateSubkeys();
             this.subKeys.Reverse();
+            SwapLists(this.xKey1, this.xKey2);
 
             ChopperByte(Crypt(file), result_bytes);
 
