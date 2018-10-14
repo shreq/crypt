@@ -60,8 +60,11 @@ namespace zad1
             try
             {
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
-                dx.xKey1 = dx.xKey2 = dx.key;
+                dx.ConvertIntoBoolList(dx.xKey1String, dx.xKey1);
+                dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
+                //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Encrypt();
+                dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
@@ -74,8 +77,11 @@ namespace zad1
             try
             {
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
-                dx.xKey1 = dx.xKey2 = dx.key;
+                dx.ConvertIntoBoolList(dx.xKey1String, dx.xKey1);
+                dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
+                //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
+                dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
             }
             catch(Exception x)
             {
@@ -98,6 +104,16 @@ namespace zad1
             {
                 MessageBox.Show(x.Message);
             }
+        }
+
+        private void Keyx1TB_TextChanged(object sender, EventArgs e)
+        {
+            dx.xKey1String = keyx1TB.Text.Replace(" ", "");
+        }
+
+        private void Keyx2TB_TextChanged(object sender, EventArgs e)
+        {
+            dx.xKey2String = keyx2TB.Text.Replace(" ", "");
         }
     }
 }

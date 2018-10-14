@@ -42,11 +42,15 @@ namespace zad1
             this.textoutTB = new System.Windows.Forms.TextBox();
             this.textL = new System.Windows.Forms.Label();
             this.textB = new System.Windows.Forms.Button();
+            this.keyx1TB = new System.Windows.Forms.TextBox();
+            this.keyx2TB = new System.Windows.Forms.TextBox();
+            this.keyx1L = new System.Windows.Forms.Label();
+            this.keyx2L = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // helpB
             // 
-            this.helpB.Location = new System.Drawing.Point(395, 258);
+            this.helpB.Location = new System.Drawing.Point(397, 301);
             this.helpB.Margin = new System.Windows.Forms.Padding(2);
             this.helpB.Name = "helpB";
             this.helpB.Size = new System.Drawing.Size(70, 20);
@@ -58,7 +62,7 @@ namespace zad1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 202);
+            this.label1.Location = new System.Drawing.Point(14, 254);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 4;
@@ -67,7 +71,7 @@ namespace zad1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 228);
+            this.label2.Location = new System.Drawing.Point(14, 280);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 5;
@@ -75,7 +79,7 @@ namespace zad1
             // 
             // keyTB
             // 
-            this.keyTB.Location = new System.Drawing.Point(68, 12);
+            this.keyTB.Location = new System.Drawing.Point(69, 64);
             this.keyTB.Name = "keyTB";
             this.keyTB.Size = new System.Drawing.Size(321, 20);
             this.keyTB.TabIndex = 6;
@@ -85,7 +89,7 @@ namespace zad1
             // ketL
             // 
             this.ketL.AutoSize = true;
-            this.ketL.Location = new System.Drawing.Point(12, 15);
+            this.ketL.Location = new System.Drawing.Point(13, 67);
             this.ketL.Name = "ketL";
             this.ketL.Size = new System.Drawing.Size(28, 13);
             this.ketL.TabIndex = 7;
@@ -93,7 +97,7 @@ namespace zad1
             // 
             // filepathTB
             // 
-            this.filepathTB.Location = new System.Drawing.Point(68, 38);
+            this.filepathTB.Location = new System.Drawing.Point(69, 90);
             this.filepathTB.Name = "filepathTB";
             this.filepathTB.Size = new System.Drawing.Size(321, 20);
             this.filepathTB.TabIndex = 8;
@@ -102,7 +106,7 @@ namespace zad1
             // filepathL
             // 
             this.filepathL.AutoSize = true;
-            this.filepathL.Location = new System.Drawing.Point(12, 42);
+            this.filepathL.Location = new System.Drawing.Point(13, 94);
             this.filepathL.Name = "filepathL";
             this.filepathL.Size = new System.Drawing.Size(50, 13);
             this.filepathL.TabIndex = 9;
@@ -110,7 +114,7 @@ namespace zad1
             // 
             // filepathB
             // 
-            this.filepathB.Location = new System.Drawing.Point(395, 38);
+            this.filepathB.Location = new System.Drawing.Point(397, 90);
             this.filepathB.Name = "filepathB";
             this.filepathB.Size = new System.Drawing.Size(69, 20);
             this.filepathB.TabIndex = 10;
@@ -120,7 +124,7 @@ namespace zad1
             // 
             // encryptB
             // 
-            this.encryptB.Location = new System.Drawing.Point(13, 135);
+            this.encryptB.Location = new System.Drawing.Point(14, 187);
             this.encryptB.Name = "encryptB";
             this.encryptB.Size = new System.Drawing.Size(223, 41);
             this.encryptB.TabIndex = 11;
@@ -130,7 +134,7 @@ namespace zad1
             // 
             // decryptB
             // 
-            this.decryptB.Location = new System.Drawing.Point(242, 135);
+            this.decryptB.Location = new System.Drawing.Point(243, 187);
             this.decryptB.Name = "decryptB";
             this.decryptB.Size = new System.Drawing.Size(223, 41);
             this.decryptB.TabIndex = 12;
@@ -140,14 +144,14 @@ namespace zad1
             // 
             // textinTB
             // 
-            this.textinTB.Location = new System.Drawing.Point(68, 64);
+            this.textinTB.Location = new System.Drawing.Point(69, 116);
             this.textinTB.Name = "textinTB";
             this.textinTB.Size = new System.Drawing.Size(321, 20);
             this.textinTB.TabIndex = 13;
             // 
             // textoutTB
             // 
-            this.textoutTB.Location = new System.Drawing.Point(68, 90);
+            this.textoutTB.Location = new System.Drawing.Point(69, 142);
             this.textoutTB.Name = "textoutTB";
             this.textoutTB.Size = new System.Drawing.Size(321, 20);
             this.textoutTB.TabIndex = 14;
@@ -155,7 +159,7 @@ namespace zad1
             // textL
             // 
             this.textL.AutoSize = true;
-            this.textL.Location = new System.Drawing.Point(13, 67);
+            this.textL.Location = new System.Drawing.Point(14, 119);
             this.textL.Name = "textL";
             this.textL.Size = new System.Drawing.Size(31, 13);
             this.textL.TabIndex = 15;
@@ -163,7 +167,7 @@ namespace zad1
             // 
             // textB
             // 
-            this.textB.Location = new System.Drawing.Point(394, 64);
+            this.textB.Location = new System.Drawing.Point(396, 116);
             this.textB.Name = "textB";
             this.textB.Size = new System.Drawing.Size(70, 20);
             this.textB.TabIndex = 16;
@@ -171,11 +175,49 @@ namespace zad1
             this.textB.UseVisualStyleBackColor = true;
             this.textB.Click += new System.EventHandler(this.TextB_Click);
             // 
+            // keyx1TB
+            // 
+            this.keyx1TB.Location = new System.Drawing.Point(69, 12);
+            this.keyx1TB.Name = "keyx1TB";
+            this.keyx1TB.Size = new System.Drawing.Size(321, 20);
+            this.keyx1TB.TabIndex = 17;
+            this.keyx1TB.TextChanged += new System.EventHandler(this.Keyx1TB_TextChanged);
+            // 
+            // keyx2TB
+            // 
+            this.keyx2TB.Location = new System.Drawing.Point(69, 38);
+            this.keyx2TB.Name = "keyx2TB";
+            this.keyx2TB.Size = new System.Drawing.Size(321, 20);
+            this.keyx2TB.TabIndex = 18;
+            this.keyx2TB.TextChanged += new System.EventHandler(this.Keyx2TB_TextChanged);
+            // 
+            // keyx1L
+            // 
+            this.keyx1L.AutoSize = true;
+            this.keyx1L.Location = new System.Drawing.Point(14, 15);
+            this.keyx1L.Name = "keyx1L";
+            this.keyx1L.Size = new System.Drawing.Size(54, 13);
+            this.keyx1L.TabIndex = 19;
+            this.keyx1L.Text = "xor Key 1:";
+            // 
+            // keyx2L
+            // 
+            this.keyx2L.AutoSize = true;
+            this.keyx2L.Location = new System.Drawing.Point(14, 41);
+            this.keyx2L.Name = "keyx2L";
+            this.keyx2L.Size = new System.Drawing.Size(54, 13);
+            this.keyx2L.TabIndex = 20;
+            this.keyx2L.Text = "xor Key 2:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 289);
+            this.ClientSize = new System.Drawing.Size(476, 332);
+            this.Controls.Add(this.keyx2L);
+            this.Controls.Add(this.keyx1L);
+            this.Controls.Add(this.keyx2TB);
+            this.Controls.Add(this.keyx1TB);
             this.Controls.Add(this.textB);
             this.Controls.Add(this.textL);
             this.Controls.Add(this.textoutTB);
@@ -214,5 +256,9 @@ namespace zad1
         private System.Windows.Forms.TextBox textoutTB;
         private System.Windows.Forms.Label textL;
         private System.Windows.Forms.Button textB;
+        private System.Windows.Forms.TextBox keyx1TB;
+        private System.Windows.Forms.TextBox keyx2TB;
+        private System.Windows.Forms.Label keyx1L;
+        private System.Windows.Forms.Label keyx2L;
     }
 }

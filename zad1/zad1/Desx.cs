@@ -10,6 +10,8 @@ namespace zad1
     public class Desx
     {
         public string keyString;
+        public string xKey1String;
+        public string xKey2String;
         public string filepath;
         public byte[] file_b;
 
@@ -18,7 +20,7 @@ namespace zad1
         public List<bool> xKey1 = new List<bool>();
         public List<bool> xKey2 = new List<bool>();
         private List<List<bool>> subKeys = new List<List<bool>>();
-        private int fillBits = 0;
+        public List<byte> result_bytes = new List<byte>();
 
         public Desx() {}
 
@@ -74,16 +76,7 @@ namespace zad1
         private void FillUp64(List<bool> l) // in order to encrypt the message it has to be a multiple of 64 bits, i.e. 8 bytes
         {
             while (l.Count() % 64 != 0)
-            {
                 l.Add(false);
-                fillBits++;
-            }
-        }
-
-        private void RevertFilling(List<bool> l) // DEPRECATED
-        {
-            for (int i = 0; i < fillBits; i++)
-                l.RemoveAt(l.Count - 1);
         }
 
         public void Encrypt() // WIP
@@ -94,10 +87,9 @@ namespace zad1
             if (file.Count % 8 != 0)
                 throw new Exception();
 
-            List<byte> result_bytes = new List<byte>();
             ChopperByte(Crypt(file), result_bytes);
 
-            System.IO.File.WriteAllBytes(filepath + "xxx", result_bytes.ToArray());
+            //System.IO.File.WriteAllBytes(filepath + "xxx", result_bytes.ToArray());
         }
 
         public void Decrypt() // WIP
@@ -105,7 +97,6 @@ namespace zad1
             this.subKeys = CreateSubkeys();
             this.subKeys.Reverse();
 
-            List<byte> result_bytes = new List<byte>();
             ChopperByte(Crypt(file), result_bytes);
 
             /*
@@ -118,7 +109,12 @@ namespace zad1
             ChopperByte(result_string, result_bytes);
             */
 
-            System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
+            //System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
+        }
+
+        public void Save(string fp, byte[] ar)
+        {
+            System.IO.File.WriteAllBytes(fp, ar);
         }
 
         private string Crypt(List<bool> data) // crypts whole file
