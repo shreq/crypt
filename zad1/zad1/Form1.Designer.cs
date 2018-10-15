@@ -29,8 +29,6 @@ namespace zad1
         private void InitializeComponent()
         {
             this.helpB = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.keyTB = new System.Windows.Forms.TextBox();
             this.ketL = new System.Windows.Forms.Label();
             this.filepathTB = new System.Windows.Forms.TextBox();
@@ -50,7 +48,7 @@ namespace zad1
             // 
             // helpB
             // 
-            this.helpB.Location = new System.Drawing.Point(397, 301);
+            this.helpB.Location = new System.Drawing.Point(394, 236);
             this.helpB.Margin = new System.Windows.Forms.Padding(2);
             this.helpB.Name = "helpB";
             this.helpB.Size = new System.Drawing.Size(70, 20);
@@ -58,24 +56,6 @@ namespace zad1
             this.helpB.Text = "help";
             this.helpB.UseVisualStyleBackColor = true;
             this.helpB.Click += new System.EventHandler(this.HelpB_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 254);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 280);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "label2";
             // 
             // keyTB
             // 
@@ -114,9 +94,9 @@ namespace zad1
             // 
             // filepathB
             // 
-            this.filepathB.Location = new System.Drawing.Point(397, 90);
+            this.filepathB.Location = new System.Drawing.Point(396, 90);
             this.filepathB.Name = "filepathB";
-            this.filepathB.Size = new System.Drawing.Size(69, 20);
+            this.filepathB.Size = new System.Drawing.Size(70, 20);
             this.filepathB.TabIndex = 10;
             this.filepathB.Text = "load";
             this.filepathB.UseVisualStyleBackColor = true;
@@ -124,7 +104,7 @@ namespace zad1
             // 
             // encryptB
             // 
-            this.encryptB.Location = new System.Drawing.Point(14, 187);
+            this.encryptB.Location = new System.Drawing.Point(12, 187);
             this.encryptB.Name = "encryptB";
             this.encryptB.Size = new System.Drawing.Size(223, 41);
             this.encryptB.TabIndex = 11;
@@ -134,7 +114,7 @@ namespace zad1
             // 
             // decryptB
             // 
-            this.decryptB.Location = new System.Drawing.Point(243, 187);
+            this.decryptB.Location = new System.Drawing.Point(241, 187);
             this.decryptB.Name = "decryptB";
             this.decryptB.Size = new System.Drawing.Size(223, 41);
             this.decryptB.TabIndex = 12;
@@ -213,7 +193,7 @@ namespace zad1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(476, 332);
+            this.ClientSize = new System.Drawing.Size(476, 267);
             this.Controls.Add(this.keyx2L);
             this.Controls.Add(this.keyx1L);
             this.Controls.Add(this.keyx2TB);
@@ -229,8 +209,6 @@ namespace zad1
             this.Controls.Add(this.filepathTB);
             this.Controls.Add(this.ketL);
             this.Controls.Add(this.keyTB);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.helpB);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -241,8 +219,6 @@ namespace zad1
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
 
         private System.Windows.Forms.Label ketL;
         private System.Windows.Forms.TextBox keyTB;

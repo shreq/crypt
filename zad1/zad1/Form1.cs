@@ -30,7 +30,6 @@ namespace zad1
         private void KeyTB_TextChanged(object sender, EventArgs e)
         {
             dx.keyString = keyTB.Text.Replace(" ", "");
-            label1.Text = dx.keyString; /**/
         }
 
         private void FilepathB_Click(object sender, EventArgs e)
@@ -41,8 +40,6 @@ namespace zad1
             {
                 dx.LoadFile();
                 dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
-                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
-                label1.Text = Convert.ToString(dx.file.Last());
             }
             catch(Exception x)
             {
@@ -57,13 +54,11 @@ namespace zad1
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
                 dx.ConvertIntoBoolList(dx.xKey1String, dx.xKey1);
                 dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
-                //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Encrypt();
 
                 if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "xxx", dx.result_bytes.ToArray());
                 else
-                    //textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
                     textoutTB.Text = System.Text.Encoding.Default.GetString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
@@ -79,13 +74,11 @@ namespace zad1
                 dx.ConvertIntoBoolList(dx.keyString, dx.key);
                 dx.ConvertIntoBoolList(dx.xKey1String, dx.xKey1);
                 dx.ConvertIntoBoolList(dx.xKey2String, dx.xKey2);
-                //dx.xKey1 = dx.xKey2 = dx.key;
                 dx.Decrypt();
 
                 if (textinTB.TextLength == 0)
                     dx.Save(dx.filepath + "x", dx.result_bytes.ToArray());
                 else
-                    //textoutTB.Text = dx.BytesToString(dx.result_bytes.ToArray());
                     textoutTB.Text = System.Text.Encoding.Default.GetString(dx.result_bytes.ToArray());
             }
             catch(Exception x)
@@ -102,8 +95,6 @@ namespace zad1
             {
                 dx.LoadText();
                 dx.ConvertIntoBoolList(dx.BytesToString(dx.file_b), dx.file);
-                label2.Text = dx.file_b.Length.ToString() + "B / " + (8 * dx.file_b.Length).ToString() + "b";
-                label1.Text = Convert.ToString(dx.file.Last());
             }
             catch (Exception x)
             {

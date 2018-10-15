@@ -23,7 +23,6 @@ namespace zad1
         static void Main()
         {
             //string filepath = "./../../../image.jpg";
-            //string key = "./../../../key.txt";
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
