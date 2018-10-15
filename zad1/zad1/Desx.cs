@@ -79,7 +79,7 @@ namespace zad1
                 l.Add(false);
         }
 
-        public void Encrypt() // WIP
+        public void Encrypt() //
         {
             FillUp64(file);
             this.subKeys = CreateSubkeys();
@@ -88,29 +88,15 @@ namespace zad1
                 throw new Exception();
 
             ChopperByte(Crypt(file), result_bytes);
-
-            //System.IO.File.WriteAllBytes(filepath + "xxx", result_bytes.ToArray());
         }
 
-        public void Decrypt() // WIP
+        public void Decrypt() //
         {
             this.subKeys = CreateSubkeys();
             this.subKeys.Reverse();
             SwapLists(this.xKey1, this.xKey2);
 
             ChopperByte(Crypt(file), result_bytes);
-
-            /*
-            string result_string = BytesToString(result_bytes.ToArray());
-            List<bool> result_bool = new List<bool>();
-            ConvertIntoBoolList(result_string, result_bool);
-            result_string = "";
-            for (int i = 0; i < result_bool.Count; i++)
-                result_string += (result_bool[i] ? '1' : '0');
-            ChopperByte(result_string, result_bytes);
-            */
-
-            //System.IO.File.WriteAllBytes(filepath + "x", result_bytes.ToArray());
         }
 
         public void Save(string fp, byte[] ar)
@@ -167,7 +153,7 @@ namespace zad1
             list2.AddRange(temp);
         }
 
-        private List<bool> Feistel(List<bool> halfBlock, List<bool> subKey) // ???
+        private List<bool> Feistel(List<bool> halfBlock, List<bool> subKey) // function used for right half of M before xoring with left one
         {
             List<bool> result = Expand(halfBlock);
             Extensions.XorWithList(result, subKey);
@@ -175,7 +161,7 @@ namespace zad1
             return PboxPermutation(result);
         }
 
-        private List<bool> PboxPermutation(List<bool> halfBlock) // ???
+        private List<bool> PboxPermutation(List<bool> halfBlock) // used in the end of Feistel to permutate merged halfblock
         {
             List<bool> permutedChunk = new List<bool>();
 
@@ -185,7 +171,7 @@ namespace zad1
             return permutedChunk;
         }
 
-        private List<bool> SboxSubstitution(List<bool> expandedHalfBlock) // ???
+        private List<bool> SboxSubstitution(List<bool> expandedHalfBlock) // converts 6 bits to 4 bits from Sbox
         {
             int boxCounter = 0;
             List<bool> mixedBlock = new List<bool>();
@@ -200,7 +186,7 @@ namespace zad1
             return mixedBlock;
         }
 
-        private void FillWithValueBits(List<bool> mixedBlock, int substitutedValue) // ???
+        private void FillWithValueBits(List<bool> mixedBlock, int substitutedValue) //
         {
             string substitutedValueString = Convert.ToString(substitutedValue, 2).PadLeft(4, '0');
 
@@ -208,7 +194,7 @@ namespace zad1
                 mixedBlock.Add(Convert.ToBoolean(Convert.ToInt32(bit) - '0'));
         }
 
-        private int CalculateSboxIndex(List<bool> sixBitBlock) // ???
+        private int CalculateSboxIndex(List<bool> sixBitBlock) // calculates index in Sbox
         {
             string rowString = "";
             string columnString = "";
@@ -227,7 +213,7 @@ namespace zad1
             return 16 * row + column;
         }
 
-        private List<bool> Expand(List<bool> halfBlock) // ???
+        private List<bool> Expand(List<bool> halfBlock) // used in Feistel to expand half of chunk from 32 to 48 bits
         {
             List<bool> expandedBlock = new List<bool>();
 

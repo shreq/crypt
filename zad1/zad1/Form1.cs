@@ -21,7 +21,9 @@ namespace zad1
 
         private void HelpB_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("1. Key should be written in binary system with 64 bits\n",
+            MessageBox.Show("1. Key should be written in binary system with 64 bits\n" +
+                            "2. To crypt a file the box for 'Text' needs to be empty\n" +
+                            "3. To crypt text simply put it in proper box, box for file will be ignored",
                             "Help");
         }
 
