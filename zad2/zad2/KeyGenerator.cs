@@ -9,6 +9,12 @@ namespace zad2
         private List<int> publicKey = new List<int>();
         private List<int> w = new List<int>();
         private int q, r; //w, q and r constitute the private key
+        private readonly int keySize;
+
+        public KeyGenerator(int keySize = 8)
+        {
+            this.keySize = keySize;
+        }
 
         private List<int> GetPrimes(int r)
         {
@@ -54,7 +60,7 @@ namespace zad2
         }
 
 
-        public List<int> GetPublicKey(int keySize = 8)
+        public List<int> GetPublicKey()
         {
             Random rnd = new Random();
             // generate superincreasing sequence
