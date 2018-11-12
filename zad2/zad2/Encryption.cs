@@ -54,7 +54,7 @@ namespace zad2
         }
 
 
-        public List<int> GeneratePublicKey(int keySize = 8)
+        public List<int> GetPublicKey(int keySize = 8)
         {
             Random rnd = new Random();
             // generate superincreasing sequence
@@ -70,6 +70,13 @@ namespace zad2
             // calculate the public key, where publicKey[i] = w[i] * r % q
             w.ForEach(w => publicKey.Add(w * r % q));
             return publicKey;
+        }
+
+        public void GetPrivateKey(out List<int> w, out int q, out int r)
+        {
+            w = this.w;
+            q = this.q;
+            r = this.r;
         }
     }
 }

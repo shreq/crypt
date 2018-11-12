@@ -21,11 +21,11 @@ namespace zad2
         }
 
         [TestMethod()]
-        public void GeneratePublicKeyTest()
+        public void GetPublicKeyTest()
         {
             Encryption uh = new Encryption();
             int expected = 8;
-            var result = uh.GeneratePublicKey().Count();
+            var result = uh.GetPublicKey().Count();
             Assert.AreEqual(expected, result);
         }
     }
