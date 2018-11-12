@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zad2", "zad2\zad2.csproj", "{15342DA7-C3EF-43DD-9A47-B5D2EDB16637}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zad2Tests", "zad2Tests\zad2Tests.csproj", "{F9E438E6-D0DB-4C49-A846-8B2A2DEB4B29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{15342DA7-C3EF-43DD-9A47-B5D2EDB16637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15342DA7-C3EF-43DD-9A47-B5D2EDB16637}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15342DA7-C3EF-43DD-9A47-B5D2EDB16637}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E438E6-D0DB-4C49-A846-8B2A2DEB4B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E438E6-D0DB-4C49-A846-8B2A2DEB4B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E438E6-D0DB-4C49-A846-8B2A2DEB4B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E438E6-D0DB-4C49-A846-8B2A2DEB4B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
