@@ -1,20 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using zad2;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace zad2
 {
     [TestClass()]
-    public class EncryptionTests
+    public class KeyGeneratorTests
     {
         [TestMethod()]
         public void GetCoprimesTest()
         {
-            Encryption uh = new Encryption();
+            KeyGenerator uh = new KeyGenerator();
             var result = uh.GetCoprimes(66);
             List<int> expected = new List<int> { 5, 7, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 59, 61, 65 };
             CollectionAssert.AreEqual(expected, result);
@@ -23,7 +19,7 @@ namespace zad2
         [TestMethod()]
         public void GetPublicKeyTest()
         {
-            Encryption uh = new Encryption();
+            KeyGenerator uh = new KeyGenerator();
             int expected = 8;
             var result = uh.GetPublicKey().Count();
             Assert.AreEqual(expected, result);

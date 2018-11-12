@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace zad2
 {
-    public class Encryption
+    public class KeyGenerator
     {
         private List<int> publicKey = new List<int>();
         private List<int> w = new List<int>();
