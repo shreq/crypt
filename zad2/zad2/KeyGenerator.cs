@@ -51,10 +51,9 @@ namespace zad2
             List<int> ret = Enumerable.Range(2, copy - 2).ToList();
             foreach (int item in factors)
             {
-                ret[item-2] = 0;
-                for (int i = item*item; i < copy; i+=item)
+                for (int i = item; i < copy; i += item)
                 {
-                    ret[i-2] = 0;
+                    ret[i - 2] = 0;
                 }
             }
             ret.RemoveAll(x => x == 0);
