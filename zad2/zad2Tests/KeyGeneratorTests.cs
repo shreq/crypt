@@ -19,8 +19,8 @@ namespace zad2
         [TestMethod()]
         public void GetPublicKeyTest()
         {
-            KeyGenerator uh = new KeyGenerator();
-            int expected = 8;
+            KeyGenerator uh = new KeyGenerator(1024);
+            int expected = 1024;
             var result = uh.GetPublicKey().Count();
             Assert.AreEqual(expected, result);
         }

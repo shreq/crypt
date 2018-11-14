@@ -51,11 +51,13 @@ namespace zad2
             List<int> ret = Enumerable.Range(2, copy - 2).ToList();
             foreach (int item in factors)
             {
-                for (int i = item; i < copy; i+=item)
+                ret[item-2] = 0;
+                for (int i = item*item; i < copy; i+=item)
                 {
-                    ret.Remove(i);
+                    ret[i-2] = 0;
                 }
             }
+            ret.RemoveAll(x => x == 0);
             return ret;
         }
 
@@ -64,13 +66,13 @@ namespace zad2
         {
             Random rnd = new Random();
             // generate superincreasing sequence
-            w.Add(rnd.Next(500));
+            w.Add(rnd.Next(2));
             for (int i = 1; i < keySize; i++)
             {
-                w.Add(w.Last() + rnd.Next(500));
+                w.Add(w.Last() + rnd.Next(2));
             }
             // pick a number bigger than the sum of w
-            q = rnd.Next(w.Sum(), w.Sum() * 2);
+            q = rnd.Next(w.Sum(), w.Sum() + (int)Math.Sqrt(w.Sum()));
             // from range [1, q), pick a number that is coprime to q
             r = GetCoprimes(q)[rnd.Next(GetCoprimes(q).Count())];
             // calculate the public key, where publicKey[i] = w[i] * r % q
