@@ -18,7 +18,7 @@ namespace zad2
 
         private List<int> GetPrimes(int r)
         {
-            List<int> primes = Enumerable.Range(0, r+1).ToList();
+            List<int> primes = Enumerable.Range(0, r + 1).ToList();
             for (int i = 2; i <= Math.Sqrt(r); i++)
             {
                 if (primes[i] != i)
@@ -84,6 +84,28 @@ namespace zad2
             w = this.w;
             q = this.q;
             r = this.r;
+        }
+
+        public int inverse(int a, int n)
+        {
+            int t, r, newt, newr;
+            t = 0; newt = 1;
+            r = n; newr = a;
+            while (newr != 0)
+            {
+                int quotient = r / newr;
+                int temp = t;
+                t = newt;
+                newt = temp - quotient * newt;
+                temp = r;
+                r = newr;
+                newr = temp - quotient * newr;
+            }
+            if (t < 0)
+            {
+                t += n;
+            }
+            return t;
         }
     }
 }
