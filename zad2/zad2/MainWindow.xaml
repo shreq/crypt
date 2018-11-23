@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Title="KnibetiKnab" Height="450" Width="800">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="772" Margin="10,10,0,0"/>
+        <Grid HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="772" Margin="10,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="711*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
     </Grid>
 </Window>

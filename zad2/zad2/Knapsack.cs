@@ -7,18 +7,22 @@ using System.Text;
 
 namespace zad2
 {
-    public class Sack
+    public class Knapsack
     {
         public string filepath;
         public string keyString;
         public byte[] fileBytes;
+        public List<int> encryptedFile = new List<int>();
 
-        public List<bool> key = new List<bool>();
-        public List<bool> file = new List<bool>();
+        public List<int> publicKey = new List<int>();
+        //TODO: dodac dopelnianie do rozmiaru klucza
+        public List<int> file = new List<int>();
 
         public List<byte> resultBytes = new List<byte>();
 
-        public Sack() {}
+        public KeyGenerator generator;
+
+        public Knapsack() {}
 
         public void LoadFile()
         {
@@ -93,5 +97,31 @@ namespace zad2
             l2.Clear();
             l2.AddRange(temp);
         }
+
+        public void Encrypt()
+        {
+            int encryptedValue;
+            foreach (var chunk in file.Split(generator.PublicKey.Count))
+            {
+                encryptedValue = 0;
+                foreach (var item in chunk.Zip(generator.PublicKey, Tuple.Create))
+                {
+                    encryptedValue += (item.Item1 * item.Item2);
+                }
+                encryptedFile.Add(encryptedValue);
+            }
+        }
+
+        //TODO: to finish
+        public void Decrypt()
+        {
+            var privateKey = generator.GetPrivateKey();
+            foreach (var item in encryptedFile)
+            {
+                int i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2))%privateKey.Item2;
+            }
+        }
+
+        
     }
 }

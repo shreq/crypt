@@ -6,14 +6,28 @@ namespace zad2
 {
     public class KeyGenerator
     {
-        private List<int> publicKey = new List<int>();
         private List<int> w = new List<int>();
         private int q, r; //w, q and r constitute the private key
-        private readonly int keySize;
+
+        public List<int> PublicKey { get; set; } = new List<int>();
 
         public KeyGenerator(int keySize = 8)
         {
-            this.keySize = keySize;
+            GeneratePrivateKey(keySize);
+            GeneratePublicKey();
+        }
+
+        public KeyGenerator(List<int> w, int q, int r)
+        {
+            this.w = w;
+            this.q = q;
+            this.r = r;
+            GeneratePublicKey();
+        }
+
+        public KeyGenerator(List<int> publicKey)
+        {
+            PublicKey = publicKey;
         }
 
         private List<int> GetPrimes(int r)
@@ -37,7 +51,7 @@ namespace zad2
             return primes;
         }
 
-        public List<int> GetCoprimes(int n)
+        public int GetRandomCoprime(int n)
         {
             int copy = n;
             List<int> primes = GetPrimes(n);
@@ -57,11 +71,17 @@ namespace zad2
                 }
             }
             ret.RemoveAll(x => x == 0);
-            return ret;
+            return ret[new Random().Next(ret.Count())];
+    }
+
+
+        private void GeneratePublicKey()
+        {
+            // calculate the public key, where publicKey[i] = w[i] * r % q
+            w.ForEach(w => PublicKey.Add(w * r % q));
         }
 
-
-        public List<int> GetPublicKey()
+        private void GeneratePrivateKey(int keySize)
         {
             Random rnd = new Random();
             // generate superincreasing sequence
@@ -73,20 +93,15 @@ namespace zad2
             // pick a number bigger than the sum of w
             q = rnd.Next(w.Sum(), w.Sum() + (int)Math.Sqrt(w.Sum()));
             // from range [1, q), pick a number that is coprime to q
-            r = GetCoprimes(q)[rnd.Next(GetCoprimes(q).Count())];
-            // calculate the public key, where publicKey[i] = w[i] * r % q
-            w.ForEach(w => publicKey.Add(w * r % q));
-            return publicKey;
+            r = GetRandomCoprime(q);
         }
 
-        public void GetPrivateKey(out List<int> w, out int q, out int r)
+        public Tuple<List<int>,int,int> GetPrivateKey()
         {
-            w = this.w;
-            q = this.q;
-            r = this.r;
+            return new Tuple<List<int>, int, int>(w, q, r);
         }
 
-        public int inverse(int a, int n)
+        public int Inverse(int a, int n)
         {
             int t, r, newt, newr;
             t = 0; newt = 1;
