@@ -111,17 +111,33 @@ namespace zad2
                 encryptedFile.Add(encryptedValue);
             }
         }
-
-        //TODO: to finish
-        public void Decrypt()
+        
+        public List<int> Decrypt()
         {
+            List<int> decryptedMessage = new List<int>();
             var privateKey = generator.GetPrivateKey();
+            List<int> w = privateKey.Item1;
+            int decryptedChunk;
             foreach (var item in encryptedFile)
             {
+                decryptedChunk = 0;
                 int i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2))%privateKey.Item2;
+                while (i > 0)
+                {
+                    int index = FindIndexOfSmallest(w, i);
+                    i -= w[index];
+                    decryptedChunk |= (1 << index);
+                }
+                decryptedMessage.Add(decryptedChunk);
             }
+            return decryptedMessage;
         }
 
-        
+        private int FindIndexOfSmallest(List<int> w, int i)
+        {
+            int value = w.Where(x => x <= i).Max();
+            return w.IndexOf(value);
+
+        }
     }
 }

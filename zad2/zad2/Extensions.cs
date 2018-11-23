@@ -29,5 +29,11 @@ namespace zad2
             chunks.Add(temp);
             return chunks;
         }
+
+        public static void FillToSize<T>(this List<T> collection, int size, T value)
+        {
+            int count = collection.Count == 0 ? size : size - collection.Count % size;
+            collection.AddRange(Enumerable.Repeat(value, count));
+        }
     }
 }
