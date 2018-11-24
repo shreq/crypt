@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace zad2
 {
+    [Serializable]
     public class KeyGenerator
     {
         private List<int> w = new List<int>();

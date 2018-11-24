@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace zad2
 {
@@ -21,6 +24,7 @@ namespace zad2
     /// </summary>
     public partial class MainWindow : Window
     {
+        string keysave;
         Knapsack ks = new Knapsack();
 
         public MainWindow()
@@ -83,6 +87,40 @@ namespace zad2
 
             EncryptB.Visibility = Visibility.Hidden;
             DecryptB.Visibility = Visibility.Hidden;
+        }
+
+        private void KeyB_Click(object sender, RoutedEventArgs e)
+        {
+            /*OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == true)
+                keysave = FileTB.Text = dlg.FileName;*/
+        }
+
+        private void LoadKeyB_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                keysave = FileTB.Text = dlg.FileName;
+
+                BinaryFormatter bin = new BinaryFormatter();
+                ks.generator = (KeyGenerator)bin.Deserialize(new FileStream(keysave, FileMode.Open));
+            }
+        }
+
+        private void SaveKeyB_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                keysave = FileTB.Text = dlg.FileName;
+
+                BinaryFormatter bin = new BinaryFormatter();
+                bin.Serialize(new FileStream(keysave, FileMode.Create), ks.generator);
+            }
         }
     }
 }
