@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:zad2"
         mc:Ignorable="d"
-        Title="KnibetiKnab" Height="450" Width="800">
+        Title="KnibetiKnab" Height="251" Width="528">
     <Grid>
-        <Grid HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="772" Margin="10,10,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="61*"/>
-                <ColumnDefinition Width="711*"/>
-            </Grid.ColumnDefinitions>
+        <Grid HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="500">
+            <Button x:Name="FileB" Content="Browse" HorizontalAlignment="Left" Margin="415,4,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="FileB_Click"/>
+            <TextBox x:Name="FileTB" HorizontalAlignment="Left" Height="22" Margin="80,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+            <Label x:Name="FileL" Content="File:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="DecryptB" Content="Decrypt" Margin="247,140,0,0" VerticalAlignment="Top" Width="243" HorizontalAlignment="Left" Height="50" Click="DecryptB_Click"/>
+            <Button x:Name="EncryptB" Content="Encrypt" Margin="0,140,0,0" VerticalAlignment="Top" Width="242" HorizontalAlignment="Left" Height="50" Click="EncryptB_Click"/>
         </Grid>
-
     </Grid>
 </Window>

@@ -22,7 +22,10 @@ namespace zad2
 
         public KeyGenerator generator;
 
-        public Knapsack() {}
+        public Knapsack()
+        {
+            generator = new KeyGenerator();
+        }
 
         public void LoadFile()
         {
@@ -83,6 +86,19 @@ namespace zad2
             return l;
         }
 
+        public List<int> StringToIntList(string s, List<int> l)
+        {
+            l.Clear();
+
+            if (s.Length % 8 != 0)
+                throw new Exception();
+
+            for(int i=0; i<s.Length; i++)
+                l.Add(Convert.ToInt16(Convert.ToInt16(s[i]) - '0'));
+
+            return l;
+        }
+
         public void FillUp64(List<bool> l)
         {
             while (l.Count() % 64 != 0)
@@ -98,6 +114,22 @@ namespace zad2
             l2.AddRange(temp);
         }
 
+        public List<byte> RewriteToType(List<int> lt, List<byte> lk)
+        //public List<K> RewriteToType<T, K>(List<T> lt, List<K> lk)
+        {
+            lk.Clear();
+
+            //lk = new List<K>(lt.Cast<object>().Cast<K>());
+
+            //foreach(var item in lt)
+            //    lk.Add((K)(object)item);
+
+            foreach (var item in lt)
+                lk.Add((byte)item);
+
+            return lk;
+        }
+
         public void Encrypt()
         {
             int encryptedValue;
@@ -111,7 +143,7 @@ namespace zad2
                 encryptedFile.Add(encryptedValue);
             }
         }
-        
+
         public List<int> Decrypt()
         {
             List<int> decryptedMessage = new List<int>();
@@ -137,7 +169,6 @@ namespace zad2
         {
             int value = w.Where(x => x <= i).Max();
             return w.IndexOf(value);
-
         }
     }
 }

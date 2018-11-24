@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,68 @@ namespace zad2
     /// </summary>
     public partial class MainWindow : Window
     {
+        Knapsack ks = new Knapsack();
+
         public MainWindow()
         {
             InitializeComponent();
+            Clear(true);
+        }
+
+        private void FileB_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                ks.filepath = FileTB.Text = dlg.FileName;
+
+                ks.LoadFile();
+                ks.StringToIntList(ks.BytesToString(ks.fileBytes), ks.file);
+
+                EncryptB.Visibility = Visibility.Visible;
+                DecryptB.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void EncryptB_Click(object sender, RoutedEventArgs e)
+        {
+            ks.Encrypt();
+            ks.RewriteToType(ks.encryptedFile, ks.resultBytes);
+
+            SaveFileDialog dlg = new SaveFileDialog();
+
+            if(dlg.ShowDialog() == true)
+            {
+                ks.SaveFile(dlg.FileName, ks.resultBytes.ToArray());
+                Clear();
+            }
+        }
+
+        private void DecryptB_Click(object sender, RoutedEventArgs e)
+        {
+            ks.RewriteToType(ks.Decrypt(), ks.resultBytes);
+
+            SaveFileDialog dlg = new SaveFileDialog();
+
+            if (dlg.ShowDialog() == true)
+            {
+                ks.SaveFile(dlg.FileName, ks.resultBytes.ToArray());
+                Clear();
+            }
+        }
+
+        private void Clear(bool light = false)
+        {
+            if (!light)
+            {
+                ks.filepath = FileTB.Text = "";
+                ks.fileBytes = null;
+                ks.file = new List<int>();
+            }
+
+            EncryptB.Visibility = Visibility.Hidden;
+            DecryptB.Visibility = Visibility.Hidden;
         }
     }
 }

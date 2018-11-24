@@ -7,7 +7,7 @@ namespace zad2
     public class KeyGenerator
     {
         private List<int> w = new List<int>();
-        private int q, r; //w, q and r constitute the private key
+        private int q, r;   // w, q and r constitute the private key
 
         public List<int> PublicKey { get; set; } = new List<int>();
 
@@ -72,13 +72,12 @@ namespace zad2
             }
             ret.RemoveAll(x => x == 0);
             return ret[new Random().Next(ret.Count())];
-    }
-
+        }
 
         private void GeneratePublicKey()
         {
             // calculate the public key, where publicKey[i] = w[i] * r % q
-            w.ForEach(w => PublicKey.Add(w * r % q));
+            w.ForEach(w => PublicKey.Add(w * (r % q)));
         }
 
         private void GeneratePrivateKey(int keySize)
