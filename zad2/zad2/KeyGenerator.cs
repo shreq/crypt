@@ -78,7 +78,7 @@ namespace zad2
         private void GeneratePublicKey()
         {
             // calculate the public key, where publicKey[i] = w[i] * r % q
-            w.ForEach(w => PublicKey.Add(w * (r % q)));
+            w.ForEach(w => PublicKey.Add((w * r) % q));
         }
 
         private void GeneratePrivateKey(int keySize)
