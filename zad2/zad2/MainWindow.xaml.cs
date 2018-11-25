@@ -132,7 +132,10 @@ namespace zad2
 
         private void GenerateKeyB_Click(object sender, RoutedEventArgs e)
         {
-            ks.generator = new KeyGenerator(Int32.Parse(BlockSizeTB.Text));
+            if (!string.IsNullOrEmpty(BlockSizeTB.Text))
+            {
+                ks.generator = new KeyGenerator(Int32.Parse(BlockSizeTB.Text));
+            }
         }
     }
 }
