@@ -40,12 +40,23 @@ namespace zad2
             if (dlg.ShowDialog() == true)
             {
                 ks.filepath = FileTB.Text = dlg.FileName;
+                if (dlg.FileName.Contains(".enc"))
+                {
+                    using (FileStream fs = new FileStream(dlg.FileName, FileMode.Open))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        ks.encryptedFile = (List<int>)bin.Deserialize(fs);
+                    }
+                }
+                else
+                {
+                    ks.LoadFile();
+                    ks.StringToIntList(ks.BytesToString(ks.fileBytes), ks.file);
 
-                ks.LoadFile();
-                ks.StringToIntList(ks.BytesToString(ks.fileBytes), ks.file);
-
+                }
                 EncryptB.Visibility = Visibility.Visible;
                 DecryptB.Visibility = Visibility.Visible;
+
             }
         }
 
@@ -58,7 +69,11 @@ namespace zad2
 
             if(dlg.ShowDialog() == true)
             {
-                ks.SaveFile(dlg.FileName, ks.resultBytes.ToArray());
+                using (FileStream fs = new FileStream(dlg.FileName + ".enc", FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(fs, ks.encryptedFile);
+                }
                 Clear();
             }
         }
