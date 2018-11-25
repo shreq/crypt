@@ -7,10 +7,10 @@ namespace zad2
     [Serializable]
     public class KeyGenerator
     {
-        private List<int> w = new List<int>();
-        private int q, r;   // w, q and r constitute the private key
+        private List<BigInteger> w = new List<BigInteger>();
+        private BigInteger q, r;   // w, q and r constitute the private key
 
-        public List<int> PublicKey { get; set; } = new List<int>();
+        public List<BigInteger> PublicKey { get; set; } = new List<BigInteger>();
 
         public KeyGenerator(int keySize = 8)
         {
@@ -18,7 +18,7 @@ namespace zad2
             GeneratePublicKey();
         }
 
-        public KeyGenerator(List<int> w, int q, int r)
+        public KeyGenerator(List<BigInteger> w, BigInteger q, BigInteger r)
         {
             this.w = w;
             this.q = q;
@@ -26,15 +26,15 @@ namespace zad2
             GeneratePublicKey();
         }
 
-        public KeyGenerator(List<int> publicKey)
+        public KeyGenerator(List<BigInteger> publicKey)
         {
             PublicKey = publicKey;
         }
 
-        private List<int> GetPrimes(int r)
+        private List<BigInteger> GetPrimes(BigInteger r)
         {
-            List<int> primes = Enumerable.Range(0, r + 1).ToList();
-            for (int i = 2; i <= Math.Sqrt(r); i++)
+            List<BigInteger> primes = BigInteger.Range(0, r + 1);
+            for (int i = 2; i * i < r; i++)
             {
                 if (primes[i] != i)
                 {
@@ -96,9 +96,9 @@ namespace zad2
             r = GetRandomCoprime(q);
         }
 
-        public Tuple<List<int>,int,int> GetPrivateKey()
+        public Tuple<List<BigInteger>,BigInteger,BigInteger> GetPrivateKey()
         {
-            return new Tuple<List<int>, int, int>(w, q, r);
+            return new Tuple<List<BigInteger>, BigInteger, BigInteger>(w, q, r);
         }
 
         public int Inverse(int a, int n)
