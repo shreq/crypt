@@ -89,21 +89,13 @@ namespace zad2
             DecryptB.Visibility = Visibility.Hidden;
         }
 
-        private void KeyB_Click(object sender, RoutedEventArgs e)
-        {
-            /*OpenFileDialog dlg = new OpenFileDialog();
-
-            if (dlg.ShowDialog() == true)
-                keysave = FileTB.Text = dlg.FileName;*/
-        }
-
         private void LoadKeyB_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
 
             if (dlg.ShowDialog() == true)
             {
-                keysave = FileTB.Text = dlg.FileName;
+                keysave = KeyTB.Text = dlg.FileName;
 
                 BinaryFormatter bin = new BinaryFormatter();
                 ks.generator = (KeyGenerator)bin.Deserialize(new FileStream(keysave, FileMode.Open));
@@ -116,11 +108,16 @@ namespace zad2
 
             if (dlg.ShowDialog() == true)
             {
-                keysave = FileTB.Text = dlg.FileName;
+                keysave = KeyTB.Text = dlg.FileName;
 
                 BinaryFormatter bin = new BinaryFormatter();
                 bin.Serialize(new FileStream(keysave, FileMode.Create), ks.generator);
             }
+        }
+
+        private void GenerateKeyB_Click(object sender, RoutedEventArgs e)
+        {
+            ks.generator = new KeyGenerator(Int32.Parse(BlockSizeTB.Text));
         }
     }
 }

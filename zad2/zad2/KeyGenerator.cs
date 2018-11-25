@@ -85,10 +85,10 @@ namespace zad2
         {
             Random rnd = new Random();
             // generate superincreasing sequence
-            w.Add(rnd.Next(2));
+            w.Add(rnd.Next(1, 3));
             for (int i = 1; i < keySize; i++)
             {
-                w.Add(w.Last() + rnd.Next(2));
+                w.Add(w.Sum() + rnd.Next(1, 2));
             }
             // pick a number bigger than the sum of w
             q = rnd.Next(w.Sum(), w.Sum() + (int)Math.Sqrt(w.Sum()));
