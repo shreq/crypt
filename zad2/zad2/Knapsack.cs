@@ -133,6 +133,7 @@ namespace zad2
         public void Encrypt()
         {
             int encryptedValue;
+            file.FillToSize(generator.PublicKey.Count, 0);
             foreach (var chunk in file.Split(generator.PublicKey.Count))
             {
                 encryptedValue = 0;
@@ -158,7 +159,7 @@ namespace zad2
                 {
                     int index = FindIndexOfSmallest(w, i);
                     i -= w[index];
-                    decryptedChunk |= (1 << index);
+                    decryptedChunk |= (1 << (w.Count - index - 1));
                 }
                 decryptedMessage.Add(decryptedChunk);
             }
