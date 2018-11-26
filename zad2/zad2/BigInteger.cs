@@ -4,6 +4,7 @@ using System.Text;
 
 namespace zad2
 {
+    [Serializable]
     public class BigInteger
     {
         #region static

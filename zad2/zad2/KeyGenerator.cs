@@ -60,15 +60,15 @@ namespace zad2
             return new Tuple<List<BigInteger>, BigInteger, BigInteger>(w, q, r);
         }
 
-        public int Inverse(int a, int n)
+        public BigInteger Inverse(BigInteger a, BigInteger n)
         {
-            int t, r, newt, newr;
+            BigInteger t, r, newt, newr;
             t = 0; newt = 1;
             r = n; newr = a;
             while (newr != 0)
             {
-                int quotient = r / newr;
-                int temp = t;
+                BigInteger quotient = r / newr;
+                BigInteger temp = t;
                 t = newt;
                 newt = temp - quotient * newt;
                 temp = r;

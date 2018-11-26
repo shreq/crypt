@@ -42,11 +42,8 @@ namespace zad2
                 ks.filepath = FileTB.Text = dlg.FileName;
                 if (dlg.FileName.Contains(".enc"))
                 {
-                    using (FileStream fs = new FileStream(dlg.FileName, FileMode.Open))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        ks.encryptedFile = (List<int>)bin.Deserialize(fs);
-                    }
+                    List<string> encryptedLines = new List<string>(File.ReadAllLines(dlg.FileName));
+                    encryptedLines.ForEach(item => ks.encryptedFile.Add(new BigInteger(item)));
                 }
                 else
                 {
@@ -61,32 +58,33 @@ namespace zad2
         }
 
         private void EncryptB_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             ks.Encrypt();
-            ks.RewriteToType(ks.encryptedFile, ks.resultBytes);
-
             SaveFileDialog dlg = new SaveFileDialog();
-
+            List<string> chuje = new List<string>();
+            ks.encryptedFile.ForEach(item => chuje.Add(item.ToString()));
             if(dlg.ShowDialog() == true)
             {
-                using (FileStream fs = new FileStream(dlg.FileName + ".enc", FileMode.Create))
-                {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(fs, ks.encryptedFile);
-                }
-                Clear();
+                File.WriteAllLines(dlg.FileName+".enc", chuje);
             }
         }
 
         private void DecryptB_Click(object sender, RoutedEventArgs e)
         {
-            ks.RewriteToType(ks.Decrypt(), ks.resultBytes);
-
             SaveFileDialog dlg = new SaveFileDialog();
-
+            string decrypted = ks.Decrypt();
+            byte[] arr = ks.StringToBytesArray(decrypted);
             if (dlg.ShowDialog() == true)
             {
-                ks.SaveFile(dlg.FileName, ks.resultBytes.ToArray());
+                Stream stream = new FileStream(dlg.FileName, FileMode.Create);
+                BinaryWriter bw = new BinaryWriter(stream);
+                foreach (var b in arr)
+                {
+                    bw.Write(b);
+                }
+
+                bw.Flush();
+                bw.Close();
                 Clear();
             }
         }

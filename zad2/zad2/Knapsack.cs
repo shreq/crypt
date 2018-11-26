@@ -12,7 +12,7 @@ namespace zad2
         public string filepath;
         public string keyString;
         public byte[] fileBytes;
-        public List<int> encryptedFile = new List<int>();
+        public List<BigInteger> encryptedFile = new List<BigInteger>();
 
         public List<int> publicKey = new List<int>();
         //TODO: dodac dopelnianie do rozmiaru klucza
@@ -114,25 +114,18 @@ namespace zad2
             l2.AddRange(temp);
         }
 
-        public List<byte> RewriteToType(List<int> lt, List<byte> lk)
-        //public List<K> RewriteToType<T, K>(List<T> lt, List<K> lk)
+        public List<byte> RewriteToType(List<string> lt, List<byte> lk)
         {
-            lk.Clear();
-
-            //lk = new List<K>(lt.Cast<object>().Cast<K>());
-
-            //foreach(var item in lt)
-            //    lk.Add((K)(object)item);
-
-            foreach (var item in lt)
-                lk.Add((byte)item);
+            //lk.Clear();
+           // foreach (var item in lt)
+            //    lk.Add((byte)item);
 
             return lk;
         }
 
         public void Encrypt()
         {
-            int encryptedValue;
+            BigInteger encryptedValue;
             file.FillToSize(generator.PublicKey.Count, 0);
             foreach (var chunk in file.Split(generator.PublicKey.Count))
             {
@@ -145,31 +138,51 @@ namespace zad2
             }
         }
 
-        public List<int> Decrypt()
+        public string Decrypt()
         {
-            List<int> decryptedMessage = new List<int>();
+            string decryptedMessage = string.Empty;
             var privateKey = generator.GetPrivateKey();
-            List<int> w = privateKey.Item1;
-            int decryptedChunk;
+            List<BigInteger> w = privateKey.Item1;
+            StringBuilder decryptedChunk;
             foreach (var item in encryptedFile)
             {
-                decryptedChunk = 0;
-                int i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2))%privateKey.Item2;
-                while (i > 0)
+                decryptedChunk = new StringBuilder(new string('0', generator.PublicKey.Count));
+                BigInteger i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2))%privateKey.Item2;
+                while (i != 0)
                 {
                     int index = FindIndexOfSmallest(w, i);
                     i -= w[index];
-                    decryptedChunk |= (1 << (w.Count - index - 1));
+                    decryptedChunk[index] = '1';
                 }
-                decryptedMessage.Add(decryptedChunk);
+                decryptedMessage += decryptedChunk;
             }
             return decryptedMessage;
         }
 
-        private int FindIndexOfSmallest(List<int> w, int i)
+        private int FindIndexOfSmallest(List<BigInteger> w, BigInteger i)
         {
-            int value = w.Where(x => x <= i).Max();
-            return w.IndexOf(value);
+            return w.Where(x => x <= i).Count() - 1;
+        }
+
+        public byte[] StringToBytesArray(string str)
+        {
+            var bitsToPad = 8 - str.Length % 8;
+
+            if (bitsToPad != 8)
+            {
+                var neededLength = bitsToPad + str.Length;
+                str = str.PadLeft(neededLength, '0');
+            }
+
+            int size = str.Length / 8;
+            byte[] arr = new byte[size];
+
+            for (int a = 0; a < size; a++)
+            {
+                arr[a] = Convert.ToByte(str.Substring(a * 8, 8), 2);
+            }
+
+            return arr;
         }
     }
 }
