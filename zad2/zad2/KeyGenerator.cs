@@ -31,50 +31,6 @@ namespace zad2
             PublicKey = publicKey;
         }
 
-        private List<BigInteger> GetPrimes(BigInteger r)
-        {
-            List<BigInteger> primes = BigInteger.Range(0, r + 1);
-            for (int i = 2; i * i < r; i++)
-            {
-                if (primes[i] != i)
-                {
-                    continue;
-                }
-                for (int j = i * i; j <= r; j += i)
-                {
-                    if (primes[j] < i)
-                    {
-                        continue;
-                    }
-                    primes[j] = i;
-                }
-            }
-            return primes;
-        }
-
-        public int GetRandomCoprime(int n)
-        {
-            int copy = n;
-            List<int> primes = GetPrimes(n);
-            List<int> factors = new List<int>();
-            while (primes[n] != n)
-            {
-                factors.Add(primes[n]);
-                n /= primes[n];
-            }
-            factors.Add(n);
-            List<int> ret = Enumerable.Range(2, copy - 2).ToList();
-            foreach (int item in factors)
-            {
-                for (int i = item; i < copy; i += item)
-                {
-                    ret[i - 2] = 0;
-                }
-            }
-            ret.RemoveAll(x => x == 0);
-            return ret[new Random().Next(ret.Count())];
-        }
-
         private void GeneratePublicKey()
         {
             // calculate the public key, where publicKey[i] = w[i] * r % q
@@ -88,12 +44,15 @@ namespace zad2
             w.Add(rnd.Next(1, 3));
             for (int i = 1; i < keySize; i++)
             {
-                w.Add(w.Sum() + rnd.Next(1, 2));
+                w.Add(w.Sum() + BigInteger.Random(1, 2));
             }
             // pick a number bigger than the sum of w
-            q = rnd.Next(w.Sum(), w.Sum() + (int)Math.Sqrt(w.Sum()));
+            q = BigInteger.Random(w.Sum(), 2 * w.Sum());
             // from range [1, q), pick a number that is coprime to q
-            r = GetRandomCoprime(q);
+            do
+            {
+                r = BigInteger.Random(1, q - 1);
+            } while (BigInteger.Nwd(r, q)!=1);
         }
 
         public Tuple<List<BigInteger>,BigInteger,BigInteger> GetPrivateKey()

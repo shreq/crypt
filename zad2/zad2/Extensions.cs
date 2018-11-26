@@ -35,5 +35,12 @@ namespace zad2
             int count = collection.Count == 0 ? size : size - collection.Count % size;
             collection.AddRange(Enumerable.Repeat(value, count));
         }
+
+        public static BigInteger Sum(this List<BigInteger> collection)
+        {
+            BigInteger sum = 0;
+            collection.ForEach(item => sum += item);
+            return sum;
+        }
     }
 }
