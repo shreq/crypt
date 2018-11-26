@@ -2,20 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Serialization;
 
 namespace zad2
 {
@@ -61,11 +49,11 @@ namespace zad2
         { 
             ks.Encrypt();
             SaveFileDialog dlg = new SaveFileDialog();
-            List<string> chuje = new List<string>();
-            ks.encryptedFile.ForEach(item => chuje.Add(item.ToString()));
+            List<string> encrypted = new List<string>();
+            ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
             if(dlg.ShowDialog() == true)
             {
-                File.WriteAllLines(dlg.FileName+".enc", chuje);
+                File.WriteAllLines(dlg.FileName+".enc", encrypted);
             }
         }
 

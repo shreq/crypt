@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace zad2
 {
@@ -24,11 +23,6 @@ namespace zad2
             this.q = q;
             this.r = r;
             GeneratePublicKey();
-        }
-
-        public KeyGenerator(List<BigInteger> publicKey)
-        {
-            PublicKey = publicKey;
         }
 
         private void GeneratePublicKey()

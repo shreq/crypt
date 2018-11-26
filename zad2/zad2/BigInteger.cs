@@ -39,35 +39,6 @@ namespace zad2
             return howManyBits;
         }
 
-        public static BigInteger Phi(BigInteger n)
-        {
-            BigInteger n2 = new BigInteger(n);
-            BigInteger suma = new BigInteger(n);
-            BigInteger dzielnik = 2;
-
-            while (n2 != 1)
-            {
-                while (n2 % dzielnik != 0)
-                    dzielnik++;
-                suma *= (1 - 1 / dzielnik);
-                while (n2 % dzielnik == 0)
-                {
-                    n2 /= dzielnik;
-                }
-            }
-            return suma;
-        }
-
-        internal static List<BigInteger> Range(BigInteger start, BigInteger count)
-        {
-            List<BigInteger> list = new List<BigInteger>();
-            for (BigInteger j = 0; j < count; j++)
-            {
-                list.Add(new BigInteger(j));
-            }
-            return list;
-        }
-
         public static bool MillerRabinTest(BigInteger number, BigInteger numberOfIterations)
         {
             BigInteger s, d, i, a, x, j;
@@ -101,23 +72,6 @@ namespace zad2
             }
 
             return true;
-        }
-
-        public static BigInteger GeneratePrimeNumber(int numberOfBits, int howManyMillerRabinIterations)
-        {
-            BigInteger number = Random(numberOfBits);
-
-            if (number % 2 == 0)
-            {
-                number -= 1;
-            }
-
-            while (!MillerRabinTest(number, howManyMillerRabinIterations))
-            {
-                number -= 2;
-            }
-
-            return number;
         }
 
         public static BigInteger MultiplyModulo(BigInteger a, BigInteger b, BigInteger n)
@@ -169,42 +123,6 @@ namespace zad2
             BigInteger result = new BigInteger(number);
 
             return min + result;
-        }
-
-        public static BigInteger Random(int numberOfBits)
-        {
-            return Random(0, Power(2, numberOfBits));
-        }
-
-        public static BigInteger InverseModulo(BigInteger a, BigInteger n)
-        {
-            BigInteger u, w, x, z, q;
-
-            u = 1;
-            w = a;
-            x = 0;
-            z = n;
-
-            while (w != 0)
-            {
-                if (w < z)
-                {
-                    // inverse u with x and w with z
-                    q = u; u = x; x = q;
-                    q = w; w = z; z = q;
-                }
-                q = w / z;
-                u = u - q * x;
-                w = w - q * z;
-            }
-
-            if (z != 1)
-                return 0;
-
-            if (x < 0)
-                x += n;
-
-            return x;
         }
 
         public static BigInteger Power(BigInteger b1, BigInteger b2)
@@ -349,23 +267,6 @@ namespace zad2
             return new BigInteger(val);
         }
 
-        public static bool operator &(BigInteger b1, BigInteger b2)
-        {
-            int b1HowManyBits = HowManyBits(b1);
-            int b2HowManyBits = HowManyBits(b2);
-            int howManyBits = Math.Max(b1HowManyBits, b2HowManyBits);
-            byte[] b1bits = ToBits(b1, howManyBits);
-            byte[] b2bits = ToBits(b2, howManyBits);
-
-            for (int i = 0; i < b1bits.Length; i++)
-            {
-                if (b1bits[i] == 1 && b2bits[i] == 1)
-                    return true;
-            }
-
-            return false;
-        }
-
         private static byte[] ToBits(BigInteger source, int howManyBits)
         {
             byte[] result = new byte[howManyBits];
@@ -386,11 +287,6 @@ namespace zad2
         public static BigInteger operator <<(BigInteger b1, int b2)
         {
             return b1 * Power(2, b2);
-        }
-
-        public static BigInteger operator >>(BigInteger b1, int b2)
-        {
-            return b1 / Power(2, b2);
         }
 
         public static bool operator ==(BigInteger b1, BigInteger b2)
