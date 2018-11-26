@@ -11,8 +11,8 @@
             <Button x:Name="FileB" Content="Browse" HorizontalAlignment="Left" Margin="415,4,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="FileB_Click"/>
             <TextBox x:Name="FileTB" HorizontalAlignment="Left" Height="22" Margin="80,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
             <Label x:Name="FileL" Content="File:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="DecryptB" Content="Decrypt" Margin="247,140,0,0" VerticalAlignment="Top" Width="243" HorizontalAlignment="Left" Height="50" Click="DecryptB_Click"/>
-            <Button x:Name="EncryptB" Content="Encrypt" Margin="0,140,0,0" VerticalAlignment="Top" Width="242" HorizontalAlignment="Left" Height="50" Click="EncryptB_Click"/>
+            <Button x:Name="DecryptB" Content="Decrypt" Margin="247,130,0,0" VerticalAlignment="Top" Width="243" HorizontalAlignment="Left" Height="50" Click="DecryptB_Click"/>
+            <Button x:Name="EncryptB" Content="Encrypt" Margin="0,130,0,0" VerticalAlignment="Top" Width="242" HorizontalAlignment="Left" Height="50" Click="EncryptB_Click"/>
             <Label x:Name="KeyL" Content="Key:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top" Width="75"/>
             <TextBox x:Name="KeyTB" HorizontalAlignment="Left" Height="22" Margin="80,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
             <Button x:Name="LoadKeyB" Content="Load Key" HorizontalAlignment="Left" Margin="415,35,0,0" VerticalAlignment="Top" Width="75" Click="LoadKeyB_Click" Height="21"/>
@@ -20,6 +20,7 @@
             <Button x:Name="GenerateKeyB" Content="Generate Key" HorizontalAlignment="Left" Margin="415,86,0,0" VerticalAlignment="Top" Width="75" Click="GenerateKeyB_Click" Height="22"/>
             <TextBox x:Name="BlockSizeTB" HorizontalAlignment="Left" Height="22" Margin="80,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
             <Label x:Name="BlockSizeL" Content="Block size:" HorizontalAlignment="Left" Margin="0,86,0,0" VerticalAlignment="Top" Width="75"/>
+            <Label x:Name="DebugL" Content="Debug Label" HorizontalAlignment="Left" Margin="0,180,0,-4" VerticalAlignment="Top" Width="500" Height="24" FontSize="9"/>
         </Grid>
     </Grid>
 </Window>
