@@ -30,7 +30,7 @@ namespace zad2.Tests
         {
             sack.encryptedFile = new List<BigInteger>() { 1129 };
             string decrypted = sack.Decrypt();
-            Assert.AreEqual('a', (char)(decrypted[0]));
+            Assert.AreEqual("01100001", decrypted);
         }
     }
 }

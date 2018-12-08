@@ -1,7 +1,5 @@
-﻿using zad2;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace zad2
 {
@@ -19,7 +17,7 @@ namespace zad2
         [TestMethod]
         public void PublicKeyGenerationTest()
         {
-            List<int> expectedList = new List<int>() { 295, 592, 301, 14, 28, 353, 120, 236 };
+            List<BigInteger> expectedList = new List<BigInteger>() { 295, 592, 301, 14, 28, 353, 120, 236 };
             CollectionAssert.AreEqual(expectedList, generator.PublicKey);
         }
 
@@ -32,8 +30,8 @@ namespace zad2
             BigInteger q = privateKey.Item2;
             BigInteger r = privateKey.Item3;
             CollectionAssert.AreEqual(expectedW, w);
-            Assert.AreEqual(881, q);
-            Assert.AreEqual(588, r);
+            Assert.AreEqual(new BigInteger(881), q);
+            Assert.AreEqual(new BigInteger(588), r);
         }
 
     }
