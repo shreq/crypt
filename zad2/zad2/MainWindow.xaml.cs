@@ -24,6 +24,7 @@ namespace zad2
         private void FileB_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
+            ks.encryptedFile = new List<BigInteger>();
 
             if (dlg.ShowDialog() == true)
             {
@@ -31,7 +32,6 @@ namespace zad2
                 if (dlg.FileName.Contains(".enc"))
                 {
                     List<string> encryptedLines = new List<string>(File.ReadAllLines(dlg.FileName));
-                    ks.encryptedFile = new List<BigInteger>();
                     encryptedLines.ForEach(item => ks.encryptedFile.Add(new BigInteger(item)));
                 }
                 else
@@ -51,12 +51,7 @@ namespace zad2
             ks.Encrypt();
             SaveFileDialog dlg = new SaveFileDialog();
             List<string> encrypted = new List<string>();
-            ks.encryptedFile.ForEach(item => {
-                if(item != 0)
-                {
-                    encrypted.Add(item.ToString());
-                }
-            });
+            ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
             if(dlg.ShowDialog() == true)
             {
                 File.WriteAllLines(dlg.FileName+".enc", encrypted);
