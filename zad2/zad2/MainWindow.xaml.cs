@@ -125,13 +125,18 @@ namespace zad2
 
         private void DecryptB_Click(object sender, RoutedEventArgs e)
         {
+            DebugL.Content = "decrypting";
+            string decrypted = ks.Decrypt();
+            decrypted = decrypted.TrimEnd('0');
+            while(decrypted.Length%8 != 0)
+            {
+                decrypted += "0";
+            }
+            DebugL.Content = "decrypting done";
+            byte[] arr = ks.StringToBytesArray(decrypted);
             if (FileTextCHB.IsChecked == true)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
-                DebugL.Content = "decrypting";
-                string decrypted = ks.Decrypt();
-                DebugL.Content = "decrypting done";
-                byte[] arr = ks.StringToBytesArray(decrypted);
                 if (dlg.ShowDialog() == true)
                 {
                     Stream stream = new FileStream(dlg.FileName, FileMode.Create);
@@ -140,7 +145,6 @@ namespace zad2
                     {
                         bw.Write(b);
                     }
-
                     bw.Flush();
                     bw.Close();
                     Clear();
@@ -149,11 +153,6 @@ namespace zad2
             }
             else
             {
-                DebugL.Content = "decrypting";
-                string decrypted = ks.Decrypt();
-                DebugL.Content = "decrypting done";
-                byte[] arr = ks.StringToBytesArray(decrypted);
-
                 FileTB.Text = System.Text.Encoding.Default.GetString(arr);
                 //Clear(true);
                 DebugL.Content = "text written";
