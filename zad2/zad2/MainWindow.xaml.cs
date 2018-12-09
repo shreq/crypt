@@ -61,7 +61,7 @@ namespace zad2
                 ks.StringToIntList(ks.BytesToString(ks.fileBytes), ks.file);
                 DebugL.Content = "text loaded";
 
-                ks.file.ForEach(x => ks.encryptedFile.Add(new BigInteger(x.ToString())));
+                //ks.file.ForEach(x => ks.encryptedFile.Add(new BigInteger(x.ToString())));
 
                 EncryptB.Visibility = Visibility.Visible;
                 DecryptB.Visibility = Visibility.Visible;
@@ -75,14 +75,12 @@ namespace zad2
                 DebugL.Content = "encrypting";
                 ks.Encrypt();
                 DebugL.Content = "encrypting done";
-                //SaveFileDialog dlg = new SaveFileDialog();
                 SaveFileDialog dlg = new SaveFileDialog() { Filter = "Encrypted file (*.enc)|*.enc" };
                 List<string> encrypted = new List<string>();
                 ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
 
                 if (dlg.ShowDialog() == true)
                 {
-                    //File.WriteAllLines(dlg.FileName+".enc", encrypted);
                     File.WriteAllLines(dlg.FileName, encrypted);
                     Clear();
                     DebugL.Content = "file saved";
@@ -97,11 +95,16 @@ namespace zad2
                 List<string> encrypted = new List<string>();
                 ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
 
-                List<byte> encryptedBytes = new List<byte>();
+                //List<byte> encryptedBytes = new List<byte>();
                 //encrypted.ForEach(item => encryptedBytes.Add(Convert.ToByte(item)));  // to wywali wyjatek
-                encryptedBytes = StringToBytesList(encrypted);
+                //encryptedBytes = StringToBytesList(encrypted);
 
-                FileTB.Text = System.Text.Encoding.Default.GetString(encryptedBytes.ToArray());
+                //FileTB.Text = System.Text.Encoding.Default.GetString(encryptedBytes.ToArray());
+
+                StringBuilder sb = new StringBuilder();
+                ks.encryptedFile.ForEach(x => sb.Append(x.ToString() + '\n'));
+                FileTB.Text = Encoding.Default.GetString(Encoding.Default.GetBytes(sb.ToString()));
+
                 DebugL.Content = "text written";
             }
         }
