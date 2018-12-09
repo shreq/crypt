@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 
 namespace zad2
@@ -63,6 +64,13 @@ namespace zad2
 
                 //ks.file.ForEach(x => ks.encryptedFile.Add(new BigInteger(x.ToString())));
 
+                try
+                {
+                    List<string> encryptedLines = new List<string>(Regex.Split(ks.filepath, Environment.NewLine));
+                    encryptedLines.ForEach(item => ks.encryptedFile.Add(new BigInteger(item)));
+                }
+                catch (Exception) { }
+
                 EncryptB.Visibility = Visibility.Visible;
                 DecryptB.Visibility = Visibility.Visible;
             }
@@ -92,8 +100,8 @@ namespace zad2
                 ks.Encrypt();
                 DebugL.Content = "encrypting done";
 
-                List<string> encrypted = new List<string>();
-                ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
+                //List<string> encrypted = new List<string>();
+                //ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
 
                 //List<byte> encryptedBytes = new List<byte>();
                 //encrypted.ForEach(item => encryptedBytes.Add(Convert.ToByte(item)));  // to wywali wyjatek
@@ -103,7 +111,7 @@ namespace zad2
 
                 StringBuilder sb = new StringBuilder();
                 ks.encryptedFile.ForEach(x => sb.Append(x.ToString() + '\n'));
-                FileTB.Text = Encoding.Default.GetString(Encoding.Default.GetBytes(sb.ToString()));
+                FileTB.Text = Encoding.Default.GetString(Encoding.Default.GetBytes(sb.ToString().TrimEnd('\n')));
 
                 DebugL.Content = "text written";
             }
@@ -134,7 +142,7 @@ namespace zad2
             DebugL.Content = "decrypting";
             string decrypted = ks.Decrypt();
             decrypted = decrypted.TrimEnd('0');
-            while(decrypted.Length%8 != 0)
+            while (decrypted.Length % 8 != 0)
             {
                 decrypted += "0";
             }
@@ -160,6 +168,9 @@ namespace zad2
             }
             else
             {
+                //List<string> encryptedLines = new List<string>(Regex.Split(ks.filepath, "\n"));
+                //encryptedLines.ForEach(item => ks.encryptedFile.Add(new BigInteger(item)));
+
                 FileTB.Text = System.Text.Encoding.Default.GetString(arr);
                 //Clear(true);
                 DebugL.Content = "text written";
