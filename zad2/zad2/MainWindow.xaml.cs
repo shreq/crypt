@@ -61,6 +61,8 @@ namespace zad2
                 ks.StringToIntList(ks.BytesToString(ks.fileBytes), ks.file);
                 DebugL.Content = "text loaded";
 
+                ks.file.ForEach(x => ks.encryptedFile.Add(new BigInteger(x.ToString())));
+
                 EncryptB.Visibility = Visibility.Visible;
                 DecryptB.Visibility = Visibility.Visible;
             }
@@ -77,6 +79,7 @@ namespace zad2
                 SaveFileDialog dlg = new SaveFileDialog() { Filter = "Encrypted file (*.enc)|*.enc" };
                 List<string> encrypted = new List<string>();
                 ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
+
                 if (dlg.ShowDialog() == true)
                 {
                     //File.WriteAllLines(dlg.FileName+".enc", encrypted);
@@ -134,6 +137,7 @@ namespace zad2
             }
             DebugL.Content = "decrypting done";
             byte[] arr = ks.StringToBytesArray(decrypted);
+
             if (FileTextCHB.IsChecked == true)
             {
                 SaveFileDialog dlg = new SaveFileDialog();
@@ -231,6 +235,9 @@ namespace zad2
                 FileB.Content = "Load Text";
                 FileTextCHB.Content = "Text";
                 DebugL.Content = "unchecked";
+
+                //EncryptB.Visibility = Visibility.Visible;
+                //DecryptB.Visibility = Visibility.Visible;
             }
         }
     }
