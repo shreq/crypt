@@ -27,6 +27,11 @@ namespace zad2
             fileBytes = System.IO.File.ReadAllBytes(filepath) ?? throw new Exception();
         }
 
+        public void LoadText()
+        {
+            fileBytes = System.Text.Encoding.Default.GetBytes(filepath) ?? throw new Exception();
+        }
+
         public string BytesToString(byte[] ar)
         {
             StringBuilder sb = new StringBuilder();
