@@ -9,88 +9,6 @@ namespace zad2
     {
         #region static
 
-        public static BigInteger PowerModulo(BigInteger a, BigInteger e, BigInteger n)
-        {
-            BigInteger p, w;
-            int howManyBits = HowManyBits(e);
-            byte[] bits = ToBits(e, howManyBits);
-
-            p = new BigInteger(a);
-            w = 1;
-            for (int i = bits.Length - 1; i >= 0; i--)
-            {
-                if (bits[i] == 1)
-                    w = MultiplyModulo(w, p, n);
-                p = MultiplyModulo(p, p, n);
-            }
-
-            return w;
-        }
-
-        public static int HowManyBits(BigInteger e)
-        {
-            BigInteger m = 1;
-            int howManyBits = 0;
-            while (m <= e)
-            {
-                m *= 2;
-                howManyBits++;
-            }
-            return howManyBits;
-        }
-
-        public static bool MillerRabinTest(BigInteger number, BigInteger numberOfIterations)
-        {
-            BigInteger s, d, i, a, x, j;
-
-            d = number - 1;
-            s = 0;
-            while (d % 2 == 0)
-            {
-                s++;
-                d /= 2;
-            }
-
-            for (i = 0; i < numberOfIterations; i++)
-            {
-                a = Random(2, number - 2);
-                x = PowerModulo(a, d, number);
-
-                if (x == 1 || x == number - 1)
-                    continue;
-
-                j = 1;
-                while (j < s && x != number - 1)
-                {
-                    x = MultiplyModulo(x, x, number);
-                    if (x == 1)
-                        return false;
-                    j++;
-                }
-                if (x != number - 1)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public static BigInteger MultiplyModulo(BigInteger a, BigInteger b, BigInteger n)
-        {
-            BigInteger w;
-
-            w = 0;
-            int howManyBits = HowManyBits(b);
-            byte[] bits = ToBits(b, howManyBits);
-
-            for (int i = bits.Length - 1; i >= 0; i--)
-            {
-                if (bits[i] == 1)
-                    w = (w + a) % n;
-                a = (a << 1) % n;
-            }
-            return w;
-        }
-
         public static BigInteger Nwd(BigInteger x, BigInteger y)
         {
             BigInteger temp;
@@ -123,20 +41,6 @@ namespace zad2
             BigInteger result = new BigInteger(number);
 
             return min + result;
-        }
-
-        public static BigInteger Power(BigInteger b1, BigInteger b2)
-        {
-            BigInteger power = new BigInteger();
-            BigInteger two = new BigInteger("2", false);
-            BigInteger zero = new BigInteger();
-
-            //power.Number = Pow(b1.Number, b2.Number);
-            power.Number = FastPow(b1.Number, b2.Number);
-            power.Sign = (b2 % two) == zero ? false : b1.Sign;
-            //power.Sign = b2 == two;
-
-            return power;
         }
 
         public static BigInteger Absolute(BigInteger b)
@@ -262,28 +166,6 @@ namespace zad2
         public static implicit operator BigInteger(string val)
         {
             return new BigInteger(val);
-        }
-
-        private static byte[] ToBits(BigInteger source, int howManyBits)
-        {
-            byte[] result = new byte[howManyBits];
-            BigInteger temp = new BigInteger(source);
-            int i = 0;
-
-            while (temp != 0)
-            {
-                result[i++] = Convert.ToByte((temp % 2).ToString());
-                temp /= 2;
-            }
-
-            Array.Reverse(result);
-
-            return result;
-        }
-
-        public static BigInteger operator <<(BigInteger b1, int b2)
-        {
-            return b1 * Power(2, b2);
         }
 
         public static bool operator ==(BigInteger b1, BigInteger b2)
@@ -677,34 +559,6 @@ namespace zad2
             }
 
             return Tuple.Create(result.ToString(), rem.ToString());
-        }
-
-        private static string FastPow(string number1, string number2)
-        {
-            if (number2 == "0")
-                return "1";
-            if ("13579".Contains(number2[number2.Length - 1].ToString()))
-                return Multiply(number1, Square(FastPow(number1, Divide(Subtract(number2, "1"), "2").Item1)));
-            return Square(FastPow(number1, Divide(number2, "2").Item1));
-        }
-
-        private static string Square(string number)
-        {
-            return MultiplyKaratsuba(number, number);
-        }
-
-        private static string Pow(string number1, string number2)
-        {
-            if (number2 == "0")
-            {
-                return "1";
-            }
-            string result = new string(number1.ToCharArray());
-            for (string i = "1"; Less(i, number2); i = Add(i, "1"))
-            {
-                result = Multiply(result, number1);
-            }
-            return result;
         }
 
         private static bool Less(string number1, string number2)
