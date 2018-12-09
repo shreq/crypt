@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Windows;
 
 namespace zad2
@@ -94,11 +95,32 @@ namespace zad2
                 ks.encryptedFile.ForEach(item => encrypted.Add(item.ToString()));
 
                 List<byte> encryptedBytes = new List<byte>();
-                encrypted.ForEach(item => encryptedBytes.Add(Convert.ToByte(item)));
+                //encrypted.ForEach(item => encryptedBytes.Add(Convert.ToByte(item)));  // to wywali wyjatek
+                encryptedBytes = StringToBytesList(encrypted);
 
                 FileTB.Text = System.Text.Encoding.Default.GetString(encryptedBytes.ToArray());
                 DebugL.Content = "text written";
             }
+        }
+
+        private List<byte> StringToBytesList(List<string> ls)
+        {
+            StringBuilder sb = new StringBuilder();
+            ls.ForEach(x => sb.Append(x));
+
+            List<byte> lb = new List<byte>();
+            string s = sb.ToString();
+
+            if (s.Length % 2 != 0)          // nie wiem co tu powinno sie zrobic
+            {
+                //throw new Exception();
+                s += "0";
+            }
+
+            for (int i = 0; i < s.Length; i += 2)
+                lb.Add(Convert.ToByte(s[i] + s[i + 1]));
+
+            return lb;
         }
 
         private void DecryptB_Click(object sender, RoutedEventArgs e)
@@ -133,7 +155,7 @@ namespace zad2
                 byte[] arr = ks.StringToBytesArray(decrypted);
 
                 FileTB.Text = System.Text.Encoding.Default.GetString(arr);
-                Clear();
+                //Clear(true);
                 DebugL.Content = "text written";
             }
         }
