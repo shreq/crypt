@@ -22,16 +22,28 @@ namespace zad2
             generator = new KeyGenerator();
         }
 
+        /// <summary>
+        /// Reads bytes from file which path had been specified in [this.filepath] and saves them in [this.fileBytes]
+        /// </summary>
         public void LoadFile()
         {
             fileBytes = System.IO.File.ReadAllBytes(filepath) ?? throw new Exception();
         }
 
+        /// <summary>
+        /// Reads bytes from text which had been saved to [this.filepath] and saves them in [this.fileBytes]
+        /// </summary>
         public void LoadText()
         {
             fileBytes = System.Text.Encoding.Default.GetBytes(filepath) ?? throw new Exception();
         }
 
+        /// <summary>
+        /// Converts array of bytes to single string.
+        /// Represented in binary system
+        /// </summary>
+        /// <param name="ar"></param>
+        /// <returns></returns>
         public string BytesToString(byte[] ar)
         {
             StringBuilder sb = new StringBuilder();
@@ -42,6 +54,13 @@ namespace zad2
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Converts string (representing binary value) to List of ints.
+        /// Each int equals either 0 or 1
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="l"></param>
+        /// <returns></returns>
         public List<int> StringToIntList(string s, List<int> l)
         {
             l.Clear();
@@ -55,6 +74,11 @@ namespace zad2
             return l;
         }
 
+        /// <summary>
+        /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! elaborate!
+        /// Takes [this.file] and encrypts each chunk of it with public key
+        /// Result is saved in [this.encryptedFile]
+        /// </summary>
         public void Encrypt()
         {
             BigInteger encryptedValue;
@@ -70,6 +94,12 @@ namespace zad2
             }
         }
 
+        /// <summary>
+        /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! elaborate!
+        /// Takes [this.encryptedFile] and decrypts it with private key
+        /// Result is returned
+        /// </summary>
+        /// <returns></returns>
         public string Decrypt()
         {
             string decryptedMessage = string.Empty;
@@ -79,7 +109,7 @@ namespace zad2
             foreach (var item in encryptedFile)
             {
                 decryptedChunk = new StringBuilder(new string('0', generator.PublicKey.Count));
-                BigInteger i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2))%privateKey.Item2;
+                BigInteger i = (item * generator.Inverse(privateKey.Item3, privateKey.Item2)) % privateKey.Item2;
                 while (i != 0)
                 {
                     int index = FindIndexOfSmallest(w, i);
@@ -91,11 +121,22 @@ namespace zad2
             return decryptedMessage;
         }
 
+        /// <summary>
+        /// Finds the biggest number in [w] that is smaller than [i] and returns it's index
+        /// </summary>
+        /// <param name="w"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
         private int FindIndexOfSmallest(List<BigInteger> w, BigInteger i)
         {
             return w.Where(x => x <= i).Count() - 1;
         }
 
+        /// <summary>
+        /// Converts string (representing binary value) to array of bytes
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public byte[] StringToBytesArray(string str)
         {
             var bitsToPad = 8 - str.Length % 8;

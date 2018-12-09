@@ -25,12 +25,18 @@ namespace zad2
             GeneratePublicKey();
         }
 
+        /// <summary>
+        /// Calculates the public key, where publicKey[i] = (w[i] * r) mod q
+        /// </summary>
         private void GeneratePublicKey()
         {
-            // calculate the public key, where publicKey[i] = w[i] * r % q
             w.ForEach(w => PublicKey.Add((w * r) % q));
         }
 
+        /// <summary>
+        /// Generates w, q, r - parts of private key
+        /// </summary>
+        /// <param name="keySize"></param>
         private void GeneratePrivateKey(int keySize)
         {
             Random rnd = new Random();
@@ -46,7 +52,7 @@ namespace zad2
             do
             {
                 r = BigInteger.Random(1, q - 1);
-            } while (BigInteger.Nwd(r, q)!=1);
+            } while (BigInteger.Nwd(r, q) != 1);
         }
 
         public Tuple<List<BigInteger>,BigInteger,BigInteger> GetPrivateKey()
@@ -54,6 +60,13 @@ namespace zad2
             return new Tuple<List<BigInteger>, BigInteger, BigInteger>(w, q, r);
         }
 
+        /// <summary>
+        /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! describe!
+        /// Parameters (a, n) = (q, r)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public BigInteger Inverse(BigInteger a, BigInteger n)
         {
             BigInteger t, r, newt, newr;
