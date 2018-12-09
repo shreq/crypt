@@ -62,6 +62,11 @@ namespace zad2
         {
             SaveFileDialog dlg = new SaveFileDialog();
             string decrypted = ks.Decrypt();
+            decrypted = decrypted.TrimEnd('0');
+            while(decrypted.Length%8 != 0)
+            {
+                decrypted += "0";
+            }
             byte[] arr = ks.StringToBytesArray(decrypted);
             if (dlg.ShowDialog() == true)
             {
