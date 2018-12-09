@@ -5,6 +5,13 @@ namespace zad2
 {
     public static class Extensions
     {
+        /// <summary>
+        /// Split container into chunks of desired size
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
         public static List<List<T>> Split<T>(this IEnumerable<T> collection, int size)
         {
             var chunks = new List<List<T>>();
@@ -27,12 +34,24 @@ namespace zad2
             return chunks;
         }
 
+        /// <summary>
+        /// Fills List up to desired size with given value
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="size"></param>
+        /// <param name="value"></param>
         public static void FillToSize<T>(this List<T> collection, int size, T value)
         {
             int count = collection.Count == 0 ? size : size - collection.Count % size;
             collection.AddRange(Enumerable.Repeat(value, count));
         }
 
+        /// <summary>
+        /// Sum of all items in List
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         public static BigInteger Sum(this List<BigInteger> collection)
         {
             BigInteger sum = 0;

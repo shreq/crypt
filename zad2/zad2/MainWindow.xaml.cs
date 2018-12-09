@@ -66,10 +66,14 @@ namespace zad2
 
                 try
                 {
-                    List<string> encryptedLines = new List<string>(Regex.Split(ks.filepath, Environment.NewLine));
+                    List<string> encryptedLines = new List<string>(Regex.Split(ks.filepath, "\n"));
                     encryptedLines.ForEach(item => ks.encryptedFile.Add(new BigInteger(item)));
+                    DebugL.Content = "Number to decipher";
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                    DebugL.Content = "NaN";
+                }
 
                 EncryptB.Visibility = Visibility.Visible;
                 DecryptB.Visibility = Visibility.Visible;
