@@ -35,7 +35,7 @@ namespace zad2
         {
             Random rnd = new Random();
             // generate superincreasing sequence
-            w.Add(rnd.Next(1, 3));
+            w.Add(1);
             for (int i = 1; i < keySize; i++)
             {
                 w.Add(w.Sum() + BigInteger.Random(1, 2));

@@ -232,10 +232,7 @@ namespace zad2
         public override bool Equals(object obj)
         {
             BigInteger bi = obj as BigInteger;
-            if (bi == null)
-                return false;
-            else
-                return (Number == bi.Number) && (Sign == bi.Sign);
+            return (Number == bi.Number) && (Sign == bi.Sign);
         }
 
         public override int GetHashCode()
