@@ -1,0 +1,41 @@
+﻿<Window x:Class="zad2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:zad2"
+        mc:Ignorable="d"
+        Title="KnibetiKnab" Height="263" Width="528">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="500">
+            <Button x:Name="FileB" Content="Browse" HorizontalAlignment="Left" Margin="415,4,0,0" VerticalAlignment="Top" Width="75" Height="22" Click="FileB_Click"/>
+            <TextBox x:Name="FileTB" HorizontalAlignment="Left" Height="22" Margin="80,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+<<<<<<< HEAD
+            <Label x:Name="FileL" Content="File:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="DecryptB" Content="Decrypt" Margin="247,130,0,0" VerticalAlignment="Top" Width="243" HorizontalAlignment="Left" Height="50" Click="DecryptB_Click"/>
+            <Button x:Name="EncryptB" Content="Encrypt" Margin="0,130,0,0" VerticalAlignment="Top" Width="242" HorizontalAlignment="Left" Height="50" Click="EncryptB_Click"/>
+            <Label x:Name="KeyL" Content="Key:" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="KeyTB" HorizontalAlignment="Left" Height="22" Margin="80,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+            <Button x:Name="LoadKeyB" Content="Load Key" HorizontalAlignment="Left" Margin="415,35,0,0" VerticalAlignment="Top" Width="75" Click="LoadKeyB_Click" Height="21"/>
+            <Button x:Name="SaveKeyB" Content="Save Key" HorizontalAlignment="Left" Margin="415,62,0,0" VerticalAlignment="Top" Width="75" Click="SaveKeyB_Click"/>
+            <Button x:Name="GenerateKeyB" Content="Generate Key" HorizontalAlignment="Left" Margin="415,86,0,0" VerticalAlignment="Top" Width="75" Click="GenerateKeyB_Click" Height="22"/>
+            <TextBox x:Name="BlockSizeTB" HorizontalAlignment="Left" Height="22" Margin="80,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+            <Label x:Name="BlockSizeL" Content="Block size:" HorizontalAlignment="Left" Margin="0,86,0,0" VerticalAlignment="Top" Width="75"/>
+            <Label x:Name="DebugL" Content="Debug Label" HorizontalAlignment="Left" Margin="0,180,0,-4" VerticalAlignment="Top" Width="500" Height="24" FontSize="9"/>
+=======
+            <Label x:Name="FileL" Content="Content:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="0,2,0,0"/>
+            <Button x:Name="DecryptB" Content="Decrypt" Margin="247,140,0,0" VerticalAlignment="Top" Width="243" HorizontalAlignment="Left" Height="50" Click="DecryptB_Click"/>
+            <Button x:Name="EncryptB" Content="Encrypt" Margin="0,140,0,0" VerticalAlignment="Top" Width="242" HorizontalAlignment="Left" Height="50" Click="EncryptB_Click"/>
+            <Label x:Name="KeyL" Content="Key:" HorizontalAlignment="Left" Margin="0,29,0,0" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="KeyTB" HorizontalAlignment="Left" Height="22" Margin="80,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+            <Button x:Name="LoadKeyB" Content="Load Key" HorizontalAlignment="Left" Margin="415,31,0,0" VerticalAlignment="Top" Width="75" Click="LoadKeyB_Click" Height="22"/>
+            <Button x:Name="SaveKeyB" Content="Save Key" HorizontalAlignment="Left" Margin="415,58,0,0" VerticalAlignment="Top" Width="75" Click="SaveKeyB_Click" Height="22"/>
+            <Button x:Name="GenerateKeyB" Content="Generate Key" HorizontalAlignment="Left" Margin="415,85,0,0" VerticalAlignment="Top" Width="75" Click="GenerateKeyB_Click" Height="22"/>
+            <TextBox x:Name="BlockSizeTB" HorizontalAlignment="Left" Height="22" Margin="80,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330"/>
+            <Label x:Name="BlockSizeL" Content="Block size:" HorizontalAlignment="Left" Margin="0,83,0,0" VerticalAlignment="Top" Width="75"/>
+            <Label x:Name="DebugL" Content="Debug Label" HorizontalAlignment="Left" Margin="0,195,0,-19" VerticalAlignment="Top" Width="500" Height="24" FontSize="9"/>
+            <CheckBox x:Name="FileTextCHB" Content="File (checked) / Text" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" IsChecked="True" Click="FileTextCHB_Click"/>
+>>>>>>> various_fixes
+        </Grid>
+    </Grid>
+</Window>
