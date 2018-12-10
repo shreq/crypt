@@ -93,5 +93,27 @@ namespace zad3
             primes.RemoveAt(0);
             return primes;
         }
+
+        public static BigInteger Inverse(BigInteger a, BigInteger n)
+        {
+            BigInteger t, r, newt, newr;
+            t = 0; newt = 1;
+            r = n; newr = a;
+            while (newr != 0)
+            {
+                BigInteger quotient = r / newr;
+                BigInteger temp = t;
+                t = newt;
+                newt = temp - quotient * newt;
+                temp = r;
+                r = newr;
+                newr = temp - quotient * newr;
+            }
+            if (t < 0)
+            {
+                t += n;
+            }
+            return t;
+        }
     }
 }
