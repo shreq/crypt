@@ -5,12 +5,14 @@ namespace zad3
 {
     public class KeyGenerator
     {
-        public BigInteger E { get; set; } // public key
         public BigInteger N { get; set; } // public key
         public BigInteger D { get; set; } // private key
+        public int E { get; set; } // public key
+        public BigInteger R { get; set; } // blinding factor
         public void GenerateKey()
         {
-            BigInteger p, q, n, e, d, product;
+            int e;
+            BigInteger p, q, n, r, d, product;
             using (var rng = RandomNumberGenerator.Create())
             {
                 var smallPrimes = Utils.GetPrimes(65000);
@@ -26,12 +28,16 @@ namespace zad3
                 product = (p - 1) * (q - 1);
                 do
                 {
-                    e = Utils.RandomInRange(rng, 1, BigInteger.Pow(10, 100));
-                } while (BigInteger.GreatestCommonDivisor(e, product) != 1);
+                    e = new System.Random().Next();
+                } while (BigInteger.GreatestCommonDivisor(e, product) != 1 && e > 0);
+                do
+                {
+                    r = Utils.RandomInRange(rng, 1, BigInteger.Pow(2, 64));
+                } while (BigInteger.GreatestCommonDivisor(r, n) != 1);
             }
             d = Utils.Inverse(e, product);
 
-            E = e; N = n; D = d;
+            E = e; N = n; D = d; R = r;
         }
     }
 }

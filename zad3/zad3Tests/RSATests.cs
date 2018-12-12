@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Numerics;
 
 namespace zad3.Tests
 {
@@ -6,12 +7,14 @@ namespace zad3.Tests
     public class RSATests
     {
         [TestMethod()]
-        public void GetHashSha256Test()
+        public void GetSingatureTest()
         {
-            string text = "W Szczebrzeszynie chrząszcz brzmi w trzcinie.";
-            string result = RSA.GetHashSha256(text);
-            string expected = "60d5a481f6e872f46b3b1c957d42a07796105f05722ca4f950c2c4b9d025dfc4";
-            Assert.AreEqual(expected, result);
+            var rsa = new RSA();
+            var message = "ala ma kota";
+            var signature = rsa.GetSingature(message);
+            BigInteger messageHash = RSA.GetHashSha256(message);
+            var expected = BigInteger.ModPow(messageHash, rsa.Generator.D, rsa.Generator.N);
+            Assert.AreEqual(signature, expected);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace zad3
@@ -10,6 +11,7 @@ namespace zad3
         public RSA()
         {
             Generator = new KeyGenerator();
+            Generator.GenerateKey();
         }
 
         public RSA(KeyGenerator generator)
@@ -17,17 +19,22 @@ namespace zad3
             Generator = generator;
         }
 
-        public static string GetHashSha256(string text)
+        public BigInteger GetSingature(string message)
+        {
+            BigInteger messageHash = GetHashSha256(message);
+            var blindedHash = (messageHash % Generator.N) * (BigInteger.ModPow(Generator.R, Generator.E, Generator.N));
+            var blindedSignature = BigInteger.ModPow(blindedHash, Generator.D, Generator.N);
+            var inverse_r = Utils.Inverse(Generator.R, Generator.N);
+            var signature = blindedSignature * inverse_r % Generator.N;
+            return signature;
+
+        }
+
+        public static BigInteger GetHashSha256(string text)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(text);
-            SHA256Managed hashstring = new SHA256Managed();
-            byte[] hash = hashstring.ComputeHash(bytes);
-            string hashString = string.Empty;
-            foreach (byte x in hash)
-            {
-                hashString += string.Format("{0:x2}", x);
-            }
-            return hashString;
+            var hash = SHA256.Create().ComputeHash(bytes);
+            return new BigInteger(hash);
         }
 
     }
