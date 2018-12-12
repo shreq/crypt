@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using zad3;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 
 namespace zad3.Tests
@@ -15,6 +16,15 @@ namespace zad3.Tests
             BigInteger messageHash = RSA.GetHashSha256(message);
             var expected = BigInteger.ModPow(messageHash, rsa.Generator.D, rsa.Generator.N);
             Assert.AreEqual(signature, expected);
+        }
+
+        [TestMethod()]
+        public void VerifySignatureTest()
+        {
+            var rsa = new RSA();
+            var message = "ala ma kota";
+            var signature = rsa.GetSingature(message);
+            Assert.IsTrue(rsa.VerifySignature(signature.ToString(), message));
         }
     }
 }
