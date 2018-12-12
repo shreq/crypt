@@ -1,8 +1,10 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Security.Cryptography;
 
 namespace zad3
 {
+    [Serializable]
     public class KeyGenerator
     {
         public BigInteger N { get; set; } // public key

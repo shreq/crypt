@@ -12,8 +12,8 @@ namespace zad3.Tests
         {
             var rsa = new RSA();
             var message = "ala ma kota";
-            var signature = rsa.GetSingature(message);
             BigInteger messageHash = RSA.GetHashSha256(message);
+            var signature = rsa.GetSingature(messageHash);
             var expected = BigInteger.ModPow(messageHash, rsa.Generator.D, rsa.Generator.N);
             Assert.AreEqual(signature, expected);
         }
@@ -23,8 +23,9 @@ namespace zad3.Tests
         {
             var rsa = new RSA();
             var message = "ala ma kota";
-            var signature = rsa.GetSingature(message);
-            Assert.IsTrue(rsa.VerifySignature(signature.ToString(), message));
+            BigInteger messageHash = RSA.GetHashSha256(message);
+            var signature = rsa.GetSingature(messageHash);
+            Assert.IsTrue(rsa.VerifySignature(signature.ToString(), messageHash));
         }
     }
 }

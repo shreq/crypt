@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.IO;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -19,10 +20,9 @@ namespace zad3
             Generator = generator;
         }
 
-        public BigInteger GetSingature(string message)
+        public BigInteger GetSingature(BigInteger message)
         {
-            BigInteger messageHash = GetHashSha256(message);
-            var blindedHash = (messageHash % Generator.N) * (BigInteger.ModPow(Generator.R, Generator.E, Generator.N));
+            var blindedHash = (message % Generator.N) * (BigInteger.ModPow(Generator.R, Generator.E, Generator.N));
             var blindedSignature = BigInteger.ModPow(blindedHash, Generator.D, Generator.N);
             var inverse_r = Utils.Inverse(Generator.R, Generator.N);
             var signature = blindedSignature * inverse_r % Generator.N;
@@ -30,15 +30,14 @@ namespace zad3
 
         }
 
-        public bool VerifySignature(string signatureString, string message)
+        public bool VerifySignature(string signatureString, BigInteger message)
         {
             BigInteger signature;
             if(BigInteger.TryParse(signatureString, out signature) == false)
             {
                 return false;
             }
-            BigInteger messageHash = GetHashSha256(message);
-            var expected = BigInteger.ModPow(messageHash, Generator.D, Generator.N);
+            var expected = BigInteger.ModPow(message, Generator.D, Generator.N);
             return signature.Equals(expected);
         }
 
@@ -46,6 +45,12 @@ namespace zad3
         {
             byte[] bytes = Encoding.UTF8.GetBytes(text);
             var hash = SHA256.Create().ComputeHash(bytes);
+            return new BigInteger(hash);
+        }
+
+        public static BigInteger GetHashSha256(FileStream stream)
+        {
+            var hash = SHA256.Create().ComputeHash(stream);
             return new BigInteger(hash);
         }
 
