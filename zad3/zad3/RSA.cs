@@ -30,6 +30,18 @@ namespace zad3
 
         }
 
+        public bool VerifySignature(string signatureString, string message)
+        {
+            BigInteger signature;
+            if(BigInteger.TryParse(signatureString, out signature) == false)
+            {
+                return false;
+            }
+            BigInteger messageHash = GetHashSha256(message);
+            var expected = BigInteger.ModPow(messageHash, Generator.D, Generator.N);
+            return signature.Equals(expected);
+        }
+
         public static BigInteger GetHashSha256(string text)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(text);
