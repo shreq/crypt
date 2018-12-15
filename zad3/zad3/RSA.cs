@@ -37,8 +37,8 @@ namespace zad3
             {
                 return false;
             }
-            var expected = BigInteger.ModPow(message, Generator.D, Generator.N);
-            return signature.Equals(expected);
+            var expected = BigInteger.ModPow(signature, Generator.E, Generator.N);
+            return message.Equals(expected);
         }
 
         public static BigInteger GetHashSha256(string text)
