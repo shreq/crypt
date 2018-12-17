@@ -13,8 +13,9 @@
         <Button x:Name="LoadTextB" Content="Load text" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="135,39,0,0" Height="22" Click="LoadTextB_Click"/>
         <Button x:Name="LoadKeyB" Content="Load key" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,80,0,0" Click="LoadKeyB_Click"/>
         <Button x:Name="SaveKeyB" Content="Save key" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,80,0,0" Click="SaveKeyB_Click"/>
-        <TextBox x:Name="SignatureTB" HorizontalAlignment="Left" Height="113" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="305" Margin="260,10,0,0"/>
         <Button x:Name="VerifyB" Content="Verify" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,104,0,0" Click="VerifyB_Click"/>
         <Button x:Name="SignB" Content="Sign" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,104,0,0" Click="SignB_Click"/>
+        <Button x:Name="LoadSignatureB" Content="Load signature" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="170,104,0,0" Click="LoadSignatureB_Click"/>
+        <Button x:Name="SaveSignatureB" Content="Save signature" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="170,80,0,0" Click="SaveSignatureB_Click"/>
     </Grid>
 </Window>

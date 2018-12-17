@@ -12,6 +12,7 @@ namespace zad3
     {
         public RSA Rsa { get; set; }
         public BigInteger Message { get; set; }
+        public BigInteger Signature { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -96,12 +97,12 @@ namespace zad3
 
         private void SignB_Click(object sender, RoutedEventArgs e)
         {
-            SignatureTB.Text = Rsa.GetSingature(Message).ToString();
+            Signature = Rsa.GetSingature(Message);
         }
 
         private void VerifyB_Click(object sender, RoutedEventArgs e)
         {
-            if (Rsa.VerifySignature(SignatureTB.Text, Message))
+            if (Rsa.VerifySignature(Signature.ToString(), Message))
             {
                 System.Windows.Forms.MessageBox.Show("Signature is correct.");
             }
@@ -109,6 +110,38 @@ namespace zad3
             {
                 System.Windows.Forms.MessageBox.Show("Signature is incorrect.");
             }
+        }
+
+        private void SaveSignatureB_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new SaveFileDialog())
+            {
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(dialog.FileName))
+                    {
+                        sw.WriteLine(Signature.ToString());
+                    }
+                }
+            }
+        }
+
+        private void LoadSignatureB_Click(object sender, RoutedEventArgs e)
+        {
+            string line = "";
+            using (var dialog = new OpenFileDialog())
+            {
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    using (StreamReader sr = new StreamReader(dialog.FileName))
+                    {
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+            BigInteger temp;
+            BigInteger.TryParse(line, out temp);
+            Signature = temp;
         }
     }
 }
